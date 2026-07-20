@@ -1,0 +1,9 @@
+# Personal / internal files — never upload these to the public repo
+CLAUDE.md
+DECISIONS_AND_LEARNINGS.md
+IDEAS.md
+conversation_logs/
+.claude/
+
+# macOS clutter
+.DS_Store
