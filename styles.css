@@ -156,13 +156,39 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
 }
 
 .section-title {
+  position: relative;                     /* anchor for the animated bar */
   font-size: 14px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   margin-bottom: 32px;
   padding-bottom: 12px;
-  border-bottom: 2px solid var(--red);   /* red underline marks each section */
+}
+
+/* Animated underline — fills left-to-right like a progress bar on load */
+.section-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;                 /* grow from the left edge */
+  animation: grow-bar 0.9s ease-out forwards;
+}
+
+@keyframes grow-bar {
+  to { transform: scaleX(1); }
+}
+
+/* Accessibility: respect visitors who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .section-title::after {
+    transform: scaleX(1);
+    animation: none;
+  }
 }
 
 /* ===== WORK GRID ===== */
