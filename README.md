@@ -1,34 +1,21 @@
 # Cássia Nunes — Portfolio
 
-Personal portfolio site for **Cássia Nunes**, an AI-Augmented Product Designer based in Berlin.
+The personal portfolio of **Cássia Nunes**, an AI-Augmented Product Designer based in Berlin, focused on UX and interaction design for enterprise SaaS.
 
-**Live site:** https://decassianunes.github.io/portfolio/
+**Live:** https://cassianunes.de
 
-## About
+## Tech
 
-A minimal, static portfolio built with plain **HTML, CSS, and a little JavaScript** — no framework. Hosted for free on GitHub Pages.
+A lightweight static site built with HTML, CSS, and vanilla JavaScript, hosted on GitHub Pages.
 
-## Pages
-
-- **Home** — intro and positioning
-- **Work** — selected projects
-- **Playground** — experiments and side projects
-- **About** — background and skills
-
-## Run locally
-
-Open `index.html` directly in a browser, or serve the folder:
+## Local development
 
 ```bash
 python3 -m http.server 4321
 ```
 
-Then visit http://localhost:4321
-
-## Built with
-
-HTML · CSS · JavaScript · GitHub Pages
+Then open http://localhost:4321
 
 ---
 
-Designed with care. Vibe coded with Claude Code.
+© 2026 Cássia Nunes
