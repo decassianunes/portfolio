@@ -5,5 +5,8 @@ IDEAS.md
 conversation_logs/
 .claude/
 
+# Local-only experiment — not deployed
+chatbot.js
+
 # macOS clutter
 .DS_Store

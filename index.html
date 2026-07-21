@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cássia Nunes — Product Designer</title>
-  <meta name="description" content="Cássia Nunes — AI-Augmented Product Designer. UX & Interaction Design for Enterprise SaaS and B2B." />
+  <title>Cássia Nunes — AI-Augmented Product Designer, Berlin</title>
+  <meta name="description" content="Cássia Nunes — AI-augmented Product Designer in Berlin. End-to-end UX and interaction design for complex enterprise SaaS and B2B products, across desktop and mobile." />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -24,14 +24,37 @@
 
   <!-- ===== HERO (home page) ===== -->
   <section class="hero">
-    <h1 class="hero-name">Cássia Nunes</h1>
+    <div class="hero-headline">
+      <h1 class="hero-name">Cássia Nunes</h1>
+      <div class="hero-keywords-marquee">
+        <div class="hero-keywords-track">
+          <ul class="hero-keywords" aria-label="Areas of focus">
+            <li>AI Designer</li>
+            <li>Product Designer</li>
+            <li>UX Design</li>
+            <li>Interaction Designer</li>
+            <li>Enterprise SaaS</li>
+            <li>B2B</li>
+            <li>Usability</li>
+            <li>Digital Products</li>
+          </ul>
+          <ul class="hero-keywords" aria-hidden="true">
+            <li>AI Designer</li>
+            <li>Product Designer</li>
+            <li>UX Design</li>
+            <li>Interaction Designer</li>
+            <li>Enterprise SaaS</li>
+            <li>B2B</li>
+            <li>Usability</li>
+            <li>Digital Products</li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <p class="hero-intro">
-      <!-- SUGGESTED TAGLINE — edit this in your own words -->
-      I design end-to-end product experiences for complex enterprise SaaS —
-      pairing UX and research rigour with an AI-augmented practice.
-    </p>
-    <p class="hero-keywords">
-      AI-Designer · Product Designer · UX Design · Interaction Designer · Enterprise SaaS · B2B
+      I design end-to-end product experiences for complex enterprise SaaS and B2B products,
+      with experience across desktop and mobile, pairing UX and research rigour with an
+      AI-augmented practice.
     </p>
     <a href="work.html" class="hero-link">View work →</a>
   </section>
@@ -53,5 +76,14 @@
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    // Local-only: load the experimental chatbot during development only,
+    // so it never runs (or 404s) on the live site.
+    if (["localhost", "127.0.0.1"].includes(location.hostname)) {
+      const s = document.createElement("script");
+      s.src = "chatbot.js";
+      document.body.appendChild(s);
+    }
+  </script>
 </body>
 </html>
