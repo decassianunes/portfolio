@@ -5,5 +5,8 @@ IDEAS.md
 conversation_logs/
 .claude/
 
+# Personal documents (CV etc.) — never upload to the public repo
+*.pdf
+
 # macOS clutter
 .DS_Store

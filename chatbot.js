@@ -57,7 +57,7 @@ const TOPICS = [
 
 // The friendly first message, and the message shown when nothing matches.
 const GREETING = "Cássia is my favourite Human, and I've got a lot of important and funny info about her. Ask me about her experience, skills, visa, or how to get in touch — just type your question below…";
-const NO_MATCH = "Cássia is a nice Human, but did not provide this info yet. Try another question!";
+const NO_MATCH = "I'm not human but I also have limitations. Try one of these:";
 
 
 // ---- 2. FIND THE BEST ANSWER -------------------------------
@@ -167,18 +167,32 @@ const ROBOT_STYLES = `
     background: none;
     border: none;
     cursor: pointer;
-    filter: drop-shadow(0 10px 9px rgba(205, 21, 21, 0.18));   /* soft red shadow */
+    filter: drop-shadow(0 13px 11px rgba(205, 21, 21, 0.26));   /* stronger shadow for depth */
   }
   .chatbot-robot[hidden] { display: none; }
   .chatbot-robot-svg { display: block; width: 100%; height: auto; }
 
-  /* When the chat opens, shrink the robot and let it overlap the panel's
-     top-right corner (mockup 3). */
-  .chatbot--open .chatbot-robot {
-    width: 90px;
-    margin-bottom: -24px;       /* dip down onto the header */
-    margin-right: -2px;         /* peek just past the corner */
+  /* Ground shadow under the robot — shrinks & fades as it hops, for depth. */
+  .chatbot-robot::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -4px;
+    width: 55%;
+    height: 12px;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.22);
+    filter: blur(7px);
+    border-radius: 50%;
+    z-index: -1;
   }
+
+  /* When the chat is open, hide the corner robot entirely. */
+  .chatbot--open .chatbot-robot { display: none; }
+
+  /* Pause the hero keyword marquee while the chat is open, so nothing
+     competes for attention with the fly-out. */
+  body.chatbot-active .hero-keywords-track { animation-play-state: paused; }
 
   /* The panel now flows inside the column (was absolutely positioned). */
   .chatbot-panel {
@@ -233,6 +247,9 @@ const ROBOT_STYLES = `
     .chatbot:not(.chatbot--open) .chatbot-robot-svg {
       animation: chatbot-float 3s ease-in-out infinite;
     }
+    .chatbot:not(.chatbot--open) .chatbot-robot::after {
+      animation: chatbot-shadow 3s ease-in-out infinite;   /* shadow hops in sync */
+    }
     .chatbot-loadbot { animation: chatbot-loadpulse 1.1s ease-in-out infinite; }
     .chatbot-loadbot:nth-child(1) { animation-delay: 0s; }
     .chatbot-loadbot:nth-child(2) { animation-delay: 0.12s; }
@@ -245,6 +262,11 @@ const ROBOT_STYLES = `
   @keyframes chatbot-float {
     0%, 100% { transform: translateY(0); }
     50%      { transform: translateY(-10px); }
+  }
+  /* When the robot is up (50%), its ground shadow is smaller & fainter. */
+  @keyframes chatbot-shadow {
+    0%, 100% { transform: translateX(-50%) scale(1);    opacity: 1; }
+    50%      { transform: translateX(-50%) scale(0.68); opacity: 0.5; }
   }
   @keyframes chatbot-loadpulse {
     0%, 100% { opacity: 0.16; }
@@ -294,6 +316,7 @@ function buildChatbot() {
         <button class="chatbot-close" type="button" aria-label="Close chat">×</button>
       </div>
       <div class="chatbot-messages" aria-live="polite"></div>
+      <div class="chatbot-chips-wrap"></div>
       <form class="chatbot-form">
         <input class="chatbot-input" type="text" placeholder="Type a question…" aria-label="Type your question" autocomplete="off" />
         <button class="chatbot-send" type="submit">Ask</button>
@@ -353,6 +376,45 @@ function buildChatbot() {
     messages.scrollTop = messages.scrollHeight;
   }
 
+  // Fill the persistent chip bar (which sits ABOVE the input) with one
+  // horizontally-scrolling row of suggested questions. The › arrow scrolls
+  // to reveal the rest and hides once you reach the end.
+  function populateChips() {
+    const wrap = root.querySelector(".chatbot-chips-wrap");
+    if (!wrap) return;
+
+    const row = document.createElement("div");
+    row.className = "chatbot-chips";
+    TOPICS.forEach((topic) => {
+      const chip = document.createElement("button");
+      chip.type = "button";
+      chip.className = "chatbot-chip";
+      chip.textContent = topic.label;
+      chip.addEventListener("click", () => handleQuestion(topic.label));
+      row.appendChild(chip);
+    });
+
+    const more = document.createElement("button");
+    more.type = "button";
+    more.className = "chatbot-chips-more";
+    more.setAttribute("aria-label", "Scroll for more questions");
+    more.textContent = "›";
+    more.addEventListener("click", () => {
+      row.scrollBy({ left: Math.round(row.clientWidth * 0.8), behavior: "smooth" });
+    });
+
+    // Hide the arrow + fade when there's nothing more to reveal.
+    function updateMore() {
+      const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 2;
+      wrap.classList.toggle("chips-at-end", atEnd);
+    }
+    row.addEventListener("scroll", updateMore);
+
+    wrap.appendChild(row);
+    wrap.appendChild(more);
+    requestAnimationFrame(updateMore);   // set the arrow's state after layout
+  }
+
   // React to a question — whether typed or from a chip.
   // We show a short "thinking" animation, then reveal the answer (or error).
   function handleQuestion(text) {
@@ -363,8 +425,11 @@ function buildChatbot() {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.setTimeout(() => {
       loader.remove();
-      if (topic) addMessage(topic.answer, "bot");
-      else addErrorMessage();
+      if (topic) {
+        addMessage(topic.answer, "bot");
+      } else {
+        addErrorMessage();
+      }
     }, reduce ? 250 : 900);
   }
 
@@ -372,11 +437,12 @@ function buildChatbot() {
   function setOpen(open) {
     panel.hidden = !open;
     root.classList.toggle("chatbot--open", open);
+    document.body.classList.toggle("chatbot-active", open);   // pause hero marquee while open
     toggle.setAttribute("aria-expanded", String(open));
     robot.setAttribute("aria-expanded", String(open));
     if (open) {
       if (messages.childElementCount === 0) addMessage(GREETING, "bot");  // greet on first open
-      input.focus();
+      input.focus({ preventScroll: true });   // focus the field WITHOUT scrolling/jumping the page
     } else {
       trigger.focus();   // send keyboard focus back to the opener
     }
@@ -399,6 +465,8 @@ function buildChatbot() {
     handleQuestion(text);
     input.value = "";
   });
+
+  populateChips();   // fill the persistent chip bar above the input
 }
 
 // Build the bot once the page is ready.
