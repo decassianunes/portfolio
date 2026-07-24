@@ -1,6 +1,6 @@
 # Cássia Nunes — Portfolio
 
-The personal portfolio of **Cássia Nunes**, an AI-Augmented Product Designer based in Berlin, focused on UX and interaction design for enterprise SaaS.
+The personal portfolio of **Cássia Nunes**, an AI-Augmented Product Designer based in Berlin, focused on UX and interaction design for enterprise SaaS B2B.
 
 **Live:** https://cassianunes.de
 
