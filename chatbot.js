@@ -19,7 +19,7 @@
 
 const TOPICS = [
   {
-    label: "Visa / work status",
+    label: "Visa status",
     keywords: ["visa", "work permit", "permit", "sponsorship", "sponsor", "authorization", "authorisation", "eligible", "relocate", "relocation"],
     // Real answer provided by Cássia.
     answer: "She has Permanent Residence in Germany and is currently applying for the passport. No plans to go away, and no more work for your HR ;)",
@@ -27,28 +27,38 @@ const TOPICS = [
   {
     label: "Experience",
     keywords: ["experience", "years", "background", "career", "work history", "senior", "history"],
-    answer: "I'm a Product Designer with 5+ years in UX and interaction design for enterprise SaaS products, now combining that with an AI-augmented design practice. My work spans end-to-end product design — from user research and usability testing through prototyping and delivery — in cross-functional agile teams.",
+    answer:
+      "5+ years of design, greatest hits (most recent first):<br>" +
+      "🏢 <strong>Staffbase</strong> (2021–2026) — Product Designer on an enterprise intranet used by 2,000+ companies (Adidas, DHL &amp; co.). Shipped 15+ features and even taught an AI to write subtitles.<br>" +
+      "🎓 <strong>ReDI School</strong> (2021–2025) — UI/UX mentor guiding women &amp; newcomers into tech, 4 cohorts strong.<br>" +
+      "🎨 <strong>CODE University</strong> (2021) — Visual Designer who gave Demo Day its whole look.",
   },
   {
     label: "Skills & tools",
     keywords: ["skill", "skills", "tools", "figma", "ai", "research", "design system", "stack", "software"],
-    answer: "Top skills: Product Design, AI for Design, UX, Interaction Design, and UX Research. Daily tools include Figma AI, Claude, Cursor, and other LLMs — plus a working knowledge of code environments (GitHub, VS Code).",
+    answer: "Her top skills: Product Design, AI for Design, UX, Interaction Design, and UX Research. Daily sidekicks: Figma AI, Claude, Cursor and other LLMs — plus enough code know-how (GitHub, VS Code) to be dangerous. She built me, after all 🤖",
   },
   {
     label: "Education",
     keywords: ["education", "study", "studied", "degree", "master", "ma", "university", "qualification"],
-    answer: "I hold an MA in Consumer Behaviour, which pairs a research-led mindset with hands-on UX practice.",
+    answer: "She holds a BA in Interaction Design from CODE University and an MA in Consumer Behaviour — a fancy way of saying she studies why humans click what they click, then designs around it.",
   },
   {
     label: "Location",
     keywords: ["location", "where", "based", "berlin", "city", "country", "remote", "germany"],
-    answer: "I'm based in Berlin, Germany.",
+    answer: "She's based in Berlin, Germany — where the coffee is strong and the UX is sharp.",
+  },
+  {
+    label: "The Human",
+    keywords: ["fun", "fun fact", "fun facts", "person", "personal", "personality", "human", "hobby", "hobbies", "interests", "life", "herself", "vibe", "wine", "cycling", "cycle", "bike", "brazil", "team", "teamwork"],
+    answer:
+      "Beyond the pixels: she's a genuine team player who's spent years working shoulder-to-shoulder with international colleagues. Off the clock she's learning to ride a bike as an adult — while being terrified of cars 🚲. She will not stop talking about Brazil 🇧🇷, and she never says no to a good glass of wine 🍷.",
   },
   {
     label: "Contact",
     keywords: ["contact", "email", "reach", "hire", "linkedin", "github", "get in touch", "message"],
     answer:
-      "Happy to talk! " +
+      "She'd love to hear from you! I'd pass the message along myself, but I'm just a very charming drawing. Reach her here: " +
       '<a href="mailto:nunes.decassia@gmail.com">Email</a> · ' +
       '<a href="https://www.linkedin.com/in/cassianunes/" target="_blank" rel="noopener">LinkedIn</a> · ' +
       '<a href="https://github.com/decassianunes" target="_blank" rel="noopener">GitHub</a>.',
@@ -433,6 +443,38 @@ function buildChatbot() {
     }, reduce ? 250 : 900);
   }
 
+  // --- Mobile keyboard handling (bottom sheet) --------------------
+  //  On phones the chat opens as a bottom sheet (see the ≤700px CSS).
+  //  When the on-screen keyboard appears it covers the bottom of the
+  //  screen — including the input. The Visual Viewport API tells us how
+  //  much of the screen is ACTUALLY visible (minus the keyboard), so we
+  //  lift the sheet to keep the input just above the keyboard.
+  //  On desktop (or browsers without the API) this does nothing.
+  const viewport = window.visualViewport;
+  function fitSheet() {
+    const isMobile = window.matchMedia("(max-width: 700px)").matches;
+    if (!viewport || !isMobile || panel.hidden) {
+      panel.style.height = "";     // clear any inline overrides → CSS takes over
+      panel.style.bottom = "";
+      return;
+    }
+    // How many pixels the keyboard is covering (≈0 when it's closed).
+    const keyboard = window.innerHeight - viewport.height - viewport.offsetTop;
+    if (keyboard > 80) {
+      // Keyboard is up: fill the visible area and sit right above it.
+      panel.style.height = viewport.height + "px";
+      panel.style.bottom = keyboard + "px";
+    } else {
+      // Keyboard is down: fall back to the CSS 85dvh sheet.
+      panel.style.height = "";
+      panel.style.bottom = "";
+    }
+  }
+  if (viewport) {
+    viewport.addEventListener("resize", fitSheet);
+    viewport.addEventListener("scroll", fitSheet);
+  }
+
   // One place that opens or closes the panel and keeps everything in sync.
   function setOpen(open) {
     panel.hidden = !open;
@@ -446,6 +488,7 @@ function buildChatbot() {
     } else {
       trigger.focus();   // send keyboard focus back to the opener
     }
+    fitSheet();   // re-fit the mobile bottom sheet (no-op on desktop)
   }
 
   robot.addEventListener("click", () => setOpen(true));
