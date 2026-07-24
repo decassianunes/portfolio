@@ -13,47 +13,48 @@
   <header class="site-header">
     <a href="index.html" class="logo">Cássia Nunes</a>
     <nav class="nav">
-      <a href="work.html" class="active">Work</a>
-      <a href="playground.html">Playground</a>
-      <a href="about.html">About Me</a>
+      <a href="work.html" class="active" data-i18n="nav.work">Work</a>
+      <a href="playground.html" data-i18n="nav.playground">Playground</a>
+      <a href="about.html" data-i18n="nav.about">About Me</a>
+      <div class="lang-select"></div>
     </nav>
   </header>
 
   <!-- ===== WORK (empty thumbnail placeholders) ===== -->
   <section class="section">
-    <h2 class="section-title">Work</h2>
+    <h2 class="section-title" data-i18n="work.title">Work</h2>
     <div class="work-grid">
       <!-- Each card is an empty thumbnail placeholder (not clickable yet).
            Duplicate a card to add more. -->
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Project title</h3>
-        <p class="work-card-meta">Role · Year</p>
+        <h3 class="work-card-title" data-i18n="work.projectTitle">Project title</h3>
+        <p class="work-card-meta" data-i18n="work.projectMeta">Role · Year</p>
       </div>
     </div>
   </section>
@@ -62,7 +63,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <p class="footer-label">Contact</p>
+        <p class="footer-label" data-i18n="footer.contact">Contact</p>
         <p><a href="https://www.linkedin.com/in/cassianunes/" target="_blank" rel="noopener">LinkedIn</a></p>
         <p><a href="https://github.com/decassianunes" target="_blank" rel="noopener">GitHub</a></p>
         <p><a href="mailto:nunes.decassia@gmail.com">Email</a></p>
@@ -75,5 +76,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>

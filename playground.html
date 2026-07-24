@@ -13,39 +13,40 @@
   <header class="site-header">
     <a href="index.html" class="logo">Cássia Nunes</a>
     <nav class="nav">
-      <a href="work.html">Work</a>
-      <a href="playground.html" class="active">Playground</a>
-      <a href="about.html">About Me</a>
+      <a href="work.html" data-i18n="nav.work">Work</a>
+      <a href="playground.html" class="active" data-i18n="nav.playground">Playground</a>
+      <a href="about.html" data-i18n="nav.about">About Me</a>
+      <div class="lang-select"></div>
     </nav>
   </header>
 
   <!-- ===== PLAYGROUND (experiments / side projects) ===== -->
   <section class="section">
-    <h2 class="section-title">Playground</h2>
-    <p class="about-text" style="margin-bottom: 28px;">
+    <h2 class="section-title" data-i18n="playground.title">Playground</h2>
+    <p class="about-text" style="margin-bottom: 28px;" data-i18n="playground.intro">
       Experiments, side projects, and things I'm exploring — including AI-augmented design.
     </p>
     <div class="work-grid">
       <!-- Empty thumbnail placeholders. Duplicate a card to add more. -->
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Experiment title</h3>
-        <p class="work-card-meta">Type · Year</p>
+        <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
+        <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Experiment title</h3>
-        <p class="work-card-meta">Type · Year</p>
+        <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
+        <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Experiment title</h3>
-        <p class="work-card-meta">Type · Year</p>
+        <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
+        <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
       <div class="work-card">
         <div class="thumb"></div>
-        <h3 class="work-card-title">Experiment title</h3>
-        <p class="work-card-meta">Type · Year</p>
+        <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
+        <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
     </div>
   </section>
@@ -54,7 +55,7 @@
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-col">
-        <p class="footer-label">Contact</p>
+        <p class="footer-label" data-i18n="footer.contact">Contact</p>
         <p><a href="https://www.linkedin.com/in/cassianunes/" target="_blank" rel="noopener">LinkedIn</a></p>
         <p><a href="https://github.com/decassianunes" target="_blank" rel="noopener">GitHub</a></p>
         <p><a href="mailto:nunes.decassia@gmail.com">Email</a></p>
@@ -67,5 +68,6 @@
   </footer>
 
   <script src="script.js"></script>
+  <script src="i18n.js"></script>
 </body>
 </html>
