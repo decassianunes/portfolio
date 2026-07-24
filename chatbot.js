@@ -71,12 +71,23 @@ const NO_MATCH = "I'm not human but I also have limitations. Try one of these:";
 
 
 // ---- 2. FIND THE BEST ANSWER -------------------------------
-//  Lowercase what the visitor typed, then return the first topic
-//  whose keywords appear in the text. Returns null if none match.
+//  Lowercase what the visitor typed, then return the first topic whose
+//  keywords appear as WHOLE WORDS in the text. Returns null if none match.
+//
+//  Why whole words? A plain "is it inside the text?" check caused wrong
+//  answers: the "ma" keyword (for an MA degree) hides inside "hu-ma-n",
+//  so clicking "The Human" wrongly returned the Education answer. The
+//  \b markers below mean "word boundary", so a keyword must stand alone.
+
+// Turn a keyword into a whole-word matcher (escapes any special characters).
+function wholeWord(word) {
+  const escaped = word.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return new RegExp("\\b" + escaped + "\\b");
+}
 
 function findTopic(text) {
   const q = text.toLowerCase();
-  return TOPICS.find((topic) => topic.keywords.some((word) => q.includes(word))) || null;
+  return TOPICS.find((topic) => topic.keywords.some((word) => wholeWord(word).test(q))) || null;
 }
 
 

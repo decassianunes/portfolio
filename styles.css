@@ -6,6 +6,7 @@
   --red: #CD1515;           /* vivid red — the accent (rgba(205,21,21,1)) */
   --red-50: #E68A8A;        /* vivid red at ~50% (mixed with white) — used on hover */
   --red-deep: #860303;      /* darker red — chatbot header + user bubble, so they don't clash with the action red */
+  --red-pill: #8F0909;      /* active chatbot chip — red outline + text on hover/focus */
   --gray-line: #E7E7E7;     /* subtle borders for empty thumbnails */
   --gray-border: #D4D4D4;   /* slightly stronger neutral — chatbot chips at rest */
   --gray-thumb: #F4F4F4;    /* empty thumbnail fill */
@@ -586,13 +587,14 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
-/* Red appears only on interaction — hover or keyboard focus — so the
-   resting row stays neutral and doesn't compete with the Ask button. */
+/* Red appears only on interaction — hover or keyboard focus. The active
+   pill gets a red outline + red text (not a solid fill), so it reads as
+   "active" without competing with the solid-red Ask button. Resting pills
+   keep their neutral grey border. */
 .chatbot-chip:hover,
 .chatbot-chip:focus-visible {
-  background: var(--red);
-  border-color: var(--red);
-  color: var(--white);
+  border-color: var(--red-pill);
+  color: var(--red-pill);
   outline: none;
 }
 
