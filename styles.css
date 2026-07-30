@@ -701,6 +701,19 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 
+  /* Prevent iOS Safari from auto-zooming when the input is tapped.
+     Safari zooms any input with font-size < 16px — bumping to 16px stops it. */
+  .chatbot-input {
+    font-size: 16px;
+  }
+
+  /* Larger touch targets for chips on mobile — WCAG recommends 44px minimum.
+     Bumping padding from 6px/12px to 10px/16px gets closer without looking bulky. */
+  .chatbot-chip {
+    padding: 10px 16px;
+    font-size: 14px;
+  }
+
   /* Lock the page behind the sheet so two things don't scroll at once.
      overflow: hidden alone doesn't stop iOS Safari from scrolling the page
      when the keyboard opens. position: fixed + top offset (set by JS) is
