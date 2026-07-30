@@ -465,18 +465,23 @@ function buildChatbot() {
   function fitSheet() {
     const isMobile = window.matchMedia("(max-width: 700px)").matches;
     if (!viewport || !isMobile || panel.hidden) {
-      panel.style.height = "";     // clear any inline overrides → CSS takes over
+      panel.style.top = "";        // clear any inline overrides → CSS takes over
+      panel.style.height = "";
       panel.style.bottom = "";
       return;
     }
     // How many pixels the keyboard is covering (≈0 when it's closed).
-    const keyboard = window.innerHeight - viewport.height - viewport.offsetTop;
+    const keyboard = window.innerHeight - Math.round(viewport.height) - Math.round(viewport.offsetTop);
     if (keyboard > 80) {
-      // Keyboard is up: fill the visible area and sit right above it.
-      panel.style.height = viewport.height + "px";
-      panel.style.bottom = keyboard + "px";
+      // Keyboard is up: pin the panel to the visual viewport using top + height.
+      // More reliable than calculating bottom on iOS Safari — we directly
+      // mirror where the visual viewport actually starts and how tall it is.
+      panel.style.top = Math.round(viewport.offsetTop) + "px";
+      panel.style.height = Math.round(viewport.height) + "px";
+      panel.style.bottom = "auto";
     } else {
-      // Keyboard is down: fall back to the CSS 85dvh sheet.
+      // Keyboard is down: clear inline styles, let CSS handle the 85dvh sheet.
+      panel.style.top = "";
       panel.style.height = "";
       panel.style.bottom = "";
     }
@@ -486,6 +491,12 @@ function buildChatbot() {
     viewport.addEventListener("scroll", fitSheet);
   }
 
+  // Saved page scroll position — restored when the chat closes on mobile.
+  // Needed because body { position: fixed } (our iOS scroll-lock) resets
+  // the page to the top; the JS top-offset compensates visually, but we
+  // have to manually restore scrollY when removing position: fixed.
+  let _scrollY = 0;
+
   // One place that opens or closes the panel and keeps everything in sync.
   function setOpen(open) {
     panel.hidden = !open;
@@ -494,9 +505,16 @@ function buildChatbot() {
     toggle.setAttribute("aria-expanded", String(open));
     robot.setAttribute("aria-expanded", String(open));
     if (open) {
+      // iOS Safari: save scroll position and offset the fixed body so the
+      // page appears frozen in place while the bottom sheet is open.
+      _scrollY = window.scrollY;
+      document.body.style.top = "-" + _scrollY + "px";
       if (messages.childElementCount === 0) addMessage(GREETING, "bot");  // greet on first open
       input.focus({ preventScroll: true });   // focus the field WITHOUT scrolling/jumping the page
     } else {
+      // Unfix the body and restore where the user was before opening.
+      document.body.style.top = "";
+      window.scrollTo(0, _scrollY);
       trigger.focus();   // send keyboard focus back to the opener
     }
     fitSheet();   // re-fit the mobile bottom sheet (no-op on desktop)
