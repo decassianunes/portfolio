@@ -701,8 +701,15 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
     padding-bottom: calc(12px + env(safe-area-inset-bottom));
   }
 
-  /* Lock the page behind the sheet so two things don't scroll at once. */
-  body.chatbot-active { overflow: hidden; }
+  /* Lock the page behind the sheet so two things don't scroll at once.
+     overflow: hidden alone doesn't stop iOS Safari from scrolling the page
+     when the keyboard opens. position: fixed + top offset (set by JS) is
+     the only reliable way to freeze the page underneath the bottom sheet. */
+  body.chatbot-active {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;   /* prevents layout-width collapse from position: fixed */
+  }
 }
 
 @media (max-width: 520px) {
