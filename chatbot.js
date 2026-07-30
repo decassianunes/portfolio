@@ -331,7 +331,7 @@ function buildChatbot() {
     <button class="chatbot-robot" aria-label="Open chat — ask me about Cássia" aria-expanded="false"${hasHero ? "" : " hidden"}>
       ${ROBOT_ACTIVE_SVG}
     </button>
-    <div class="chatbot-panel" role="dialog" aria-modal="false" aria-label="Ask me about Cássia" hidden>
+    <div class="chatbot-panel" role="dialog" aria-modal="true" aria-label="Ask me about Cássia" hidden>
       <div class="chatbot-header">
         <span>Ask me about Cássia…</span>
         <button class="chatbot-close" type="button" aria-label="Close chat">×</button>
@@ -428,6 +428,10 @@ function buildChatbot() {
     function updateMore() {
       const atEnd = row.scrollLeft + row.clientWidth >= row.scrollWidth - 2;
       wrap.classList.toggle("chips-at-end", atEnd);
+      // Also remove the arrow from the tab order when it's visually hidden,
+      // so keyboard users can't land on an invisible button.
+      more.setAttribute("aria-hidden", String(atEnd));
+      more.tabIndex = atEnd ? -1 : 0;
     }
     row.addEventListener("scroll", updateMore);
 
@@ -497,6 +501,20 @@ function buildChatbot() {
   // have to manually restore scrollY when removing position: fixed.
   let _scrollY = 0;
 
+  // Elements whose aria-hidden we set when the dialog opens (only those that
+  // weren't already hidden). Stored so we can restore them on close.
+  let _bgEls = [];
+  function hideBackground() {
+    _bgEls = Array.from(document.body.children).filter(
+      el => el !== root && !el.hasAttribute("aria-hidden")
+    );
+    _bgEls.forEach(el => el.setAttribute("aria-hidden", "true"));
+  }
+  function restoreBackground() {
+    _bgEls.forEach(el => el.removeAttribute("aria-hidden"));
+    _bgEls = [];
+  }
+
   // One place that opens or closes the panel and keeps everything in sync.
   function setOpen(open) {
     panel.hidden = !open;
@@ -509,12 +527,14 @@ function buildChatbot() {
       // page appears frozen in place while the bottom sheet is open.
       _scrollY = window.scrollY;
       document.body.style.top = "-" + _scrollY + "px";
+      hideBackground();   // hide the rest of the page from screen readers
       if (messages.childElementCount === 0) addMessage(GREETING, "bot");  // greet on first open
       input.focus({ preventScroll: true });   // focus the field WITHOUT scrolling/jumping the page
     } else {
       // Unfix the body and restore where the user was before opening.
       document.body.style.top = "";
       window.scrollTo(0, _scrollY);
+      restoreBackground();   // return the rest of the page to screen readers
       trigger.focus();   // send keyboard focus back to the opener
     }
     fitSheet();   // re-fit the mobile bottom sheet (no-op on desktop)
@@ -524,9 +544,24 @@ function buildChatbot() {
   toggle.addEventListener("click", () => setOpen(panel.hidden));   // pill toggles
   closeBtn.addEventListener("click", () => setOpen(false));
 
-  // Escape closes the dialog — standard, expected accessibility behaviour.
+  // Keyboard handling inside the dialog.
   panel.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") setOpen(false);
+    if (e.key === "Escape") { setOpen(false); return; }
+    if (e.key !== "Tab") return;
+    // Focus trap: cycle Tab within the panel so keyboard users can't reach
+    // the page behind. Excludes buttons that are aria-hidden or tabindex=-1
+    // (e.g. the › arrow when all chips are visible).
+    const focusable = Array.from(
+      panel.querySelectorAll('button:not([disabled]):not([tabindex="-1"]), input:not([disabled]):not([tabindex="-1"])')
+    );
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last  = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last)  { e.preventDefault(); first.focus(); }
+    }
   });
 
   // Handle typed questions.
