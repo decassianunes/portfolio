@@ -188,11 +188,14 @@ const ROBOT_STYLES = `
     background: none;
     border: none;
     cursor: pointer;
-    filter: drop-shadow(0 13px 11px rgba(205, 21, 21, 0.26));
+    filter: drop-shadow(0 10px 8px rgba(0, 0, 0, 0.18));
     perspective: 500px;         /* 3D viewing space — makes rotateY look like real depth */
   }
   .chatbot-robot[hidden] { display: none; }
   .chatbot-robot-svg { display: block; width: 100%; height: auto; }
+
+  /* Larger robot in the hero — the bubble is wide so 116px feels too small */
+  .hero-bot-slot .chatbot-robot { width: 150px; }
 
   /* Ground shadow under the robot — shrinks & fades as it hops, for depth. */
   .chatbot-robot::after {
@@ -283,10 +286,6 @@ const ROBOT_STYLES = `
     .hero-bot-slot .chatbot-robot::after {
       animation: chatbot-shadow 4s ease-in-out infinite;
     }
-    /* Wander: apply the same animation to both the robot button and the bubble
-       so they move in lockstep. Animating each element directly avoids the
-       GPU compositing conflict that occurs when the robot's filter:drop-shadow
-       creates its own layer and ignores a parent wrapper's transform. */
     .hero-bot-slot .chatbot-robot,
     .hero-bot-unit .hero-bot-bubble {
       animation: chatbot-wander 22s ease-in-out infinite;
@@ -301,11 +300,9 @@ const ROBOT_STYLES = `
     .chatbot-loadbot:nth-child(7) { animation-delay: 0.72s; }
   }
   @keyframes chatbot-float {
-    0%   { transform: translateY(0px)   rotateY(0deg)   rotateZ(0deg); }
-    20%  { transform: translateY(-6px)  rotateY(10deg)  rotateZ(1deg); }
-    50%  { transform: translateY(-11px) rotateY(0deg)   rotateZ(0deg); }
-    80%  { transform: translateY(-6px)  rotateY(-10deg) rotateZ(-1deg); }
-    100% { transform: translateY(0px)   rotateY(0deg)   rotateZ(0deg); }
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
   }
   /* When the robot is up (50%), its ground shadow is smaller & fainter. */
   @keyframes chatbot-shadow {
@@ -315,6 +312,17 @@ const ROBOT_STYLES = `
   @keyframes chatbot-loadpulse {
     0%, 100% { opacity: 0.16; }
     50%      { opacity: 0.6; }
+  }
+  @keyframes chatbot-wander {
+    0%   { transform: translate(0px,   0px); }
+    10%  { transform: translate(14px,  -7px); }
+    22%  { transform: translate(-9px, -16px); }
+    35%  { transform: translate(22px,   9px); }
+    48%  { transform: translate(-5px,   5px); }
+    60%  { transform: translate(18px, -10px); }
+    72%  { transform: translate(-20px,  -2px); }
+    85%  { transform: translate(8px,   10px); }
+    100% { transform: translate(0px,   0px); }
   }
 
   /* On mobile the robot stays in the chatbot div (not moved to the hero).
@@ -332,19 +340,23 @@ const ROBOT_STYLES = `
     }
   }
 
-  /* Wander: organic drifting path across the hero's right column.
-     Only fires via .hero-bot-slot selector, so mobile (fixed corner) is unaffected. */
-  @keyframes chatbot-wander {
-    0%   { transform: translate(0px,   0px); }
-    10%  { transform: translate(30px, -14px); }
-    22%  { transform: translate(-18px, -32px); }
-    35%  { transform: translate(44px,  18px); }
-    48%  { transform: translate(-10px,  10px); }
-    60%  { transform: translate(36px,  -20px); }
-    72%  { transform: translate(-40px,  -4px); }
-    85%  { transform: translate(16px,   20px); }
-    100% { transform: translate(0px,   0px); }
+  /* Blinking cursor shown while the bubble types its greeting — wander animation removed;
+     the robot bobs in place via chatbot-float and the bubble animates via typing only */
+  .bubble-cursor {
+    display: inline-block;
+    width: 1.5px;
+    height: 0.9em;
+    background: currentColor;
+    margin-left: 1px;
+    vertical-align: text-bottom;
+    opacity: 1;
+    animation: cursor-blink 0.75s step-end infinite;
   }
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
+  }
+
 `;
 
 function injectRobotStyles() {
@@ -356,7 +368,56 @@ function injectRobotStyles() {
 }
 
 
-// ---- 4. BUILD THE WIDGET -----------------------------------
+// ---- 4. HERO BUBBLE TYPING ANIMATION ----------------------
+//  Cycles through short greeting messages in the hero speech bubble,
+//  typing each one in character-by-character, then fading out before
+//  the next message begins.
+
+function initBubbleTyping() {
+  const bubble = document.querySelector('.hero-bot-bubble');
+  if (!bubble) return;
+
+  const messages = [
+    "Got a question about Cássia?",
+    "Ask me about her work →",
+    "I know her pretty well. Ask me!",
+    "Curious about her process?",
+  ];
+
+  // Replace static HTML with a text span + blinking cursor span.
+  bubble.innerHTML = '<span class="bubble-text"></span><span class="bubble-cursor" aria-hidden="true"></span>';
+  const textEl = bubble.querySelector('.bubble-text');
+
+  let msgIndex = 0;
+  let timer = null;
+
+  function typeIn(msg) {
+    let i = 0;
+    function tick() {
+      textEl.textContent = msg.slice(0, ++i);
+      if (i < msg.length) {
+        timer = setTimeout(tick, 48);
+      } else {
+        timer = setTimeout(fadeOut, 2600);
+      }
+    }
+    tick();
+  }
+
+  function fadeOut() {
+    bubble.style.opacity = '0';
+    timer = setTimeout(function () {
+      msgIndex = (msgIndex + 1) % messages.length;
+      textEl.textContent = '';
+      bubble.style.opacity = '1';
+      timer = setTimeout(function () { typeIn(messages[msgIndex]); }, 80);
+    }, 350);
+  }
+
+  timer = setTimeout(function () { typeIn(messages[0]); }, 700);
+}
+
+// ---- 5. BUILD THE WIDGET -----------------------------------
 //  We create the chat HTML from JavaScript so any page can show
 //  the bot just by including this one script. You don't edit this.
 
@@ -625,23 +686,34 @@ function buildChatbot() {
   // right column and wire the speech bubble as an additional trigger.
   const heroSlot   = document.querySelector(".hero-bot-slot");
   const heroBubble = document.querySelector(".hero-bot-bubble");
-  // On desktop: move the robot into the hero right column so it can wander.
+  // On desktop: move the robot into the hero right column alongside the bubble.
   // On mobile: leave it in the chatbot div where position:fixed kicks in.
-  const isDesktop = !window.matchMedia("(max-width: 700px)").matches;
-  if (heroSlot && hasHero && isDesktop) {
-    heroSlot.appendChild(robot);
+  const heroMq = window.matchMedia("(max-width: 700px)");
+  function placeRobot() {
+    if (!heroSlot || !hasHero) return;
+    if (heroMq.matches) {
+      // mobile: put robot back in the chatbot div so position:fixed kicks in
+      root.insertBefore(robot, root.firstChild);
+    } else {
+      // desktop: move robot into the hero right column
+      heroSlot.appendChild(robot);
+    }
   }
+  placeRobot();
+  heroMq.addEventListener("change", placeRobot);
+
   if (heroBubble) {
     heroBubble.addEventListener("click", () => { if (panel.hidden) setOpen(true); });
   }
 }
 
-// Build the bot once the page is ready.
-// If the page is still loading, wait for the "ready" signal. But if the page
-// has ALREADY finished loading (which happens when this script is added late,
-// e.g. injected by another script), that signal has passed — so build now.
+// Build the bot and start the bubble typing once the page is ready.
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", buildChatbot);
+  document.addEventListener("DOMContentLoaded", function () {
+    buildChatbot();
+    initBubbleTyping();
+  });
 } else {
   buildChatbot();
+  initBubbleTyping();
 }

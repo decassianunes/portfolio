@@ -77,10 +77,12 @@ if (navToggle && siteHeader) {
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           var ease = '0.42s cubic-bezier(0.4,0,0.2,1)';
-          fly.style.transition = 'left ' + ease + ', top ' + ease + ', transform ' + ease;
+          fly.style.transition = 'left ' + ease + ', top ' + ease + ', transform ' + ease + ', color ' + ease + ', opacity 0.15s linear 0.27s';
           fly.style.left      = toRect.left + 'px';
           fly.style.top       = targetTop   + 'px';
           fly.style.transform = 'scale(' + scale + ')';
+          fly.style.color     = '#111111';
+          fly.style.opacity   = '0';
         });
       });
 
