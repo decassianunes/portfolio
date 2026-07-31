@@ -283,8 +283,8 @@ const ROBOT_STYLES = `
     .hero-bot-slot .chatbot-robot::after {
       animation: chatbot-shadow 4s ease-in-out infinite;
     }
-    /* Wander only when the robot has been relocated into the hero slot (desktop) */
-    .hero-bot-slot .chatbot-robot:not([aria-expanded="true"]) {
+    /* Wander the whole unit (bubble + robot) together on desktop */
+    .hero-bot-unit {
       animation: chatbot-wander 22s ease-in-out infinite;
     }
     .chatbot-loadbot { animation: chatbot-loadpulse 1.1s ease-in-out infinite; }
