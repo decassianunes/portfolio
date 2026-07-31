@@ -188,7 +188,8 @@ const ROBOT_STYLES = `
     background: none;
     border: none;
     cursor: pointer;
-    filter: drop-shadow(0 13px 11px rgba(205, 21, 21, 0.26));   /* stronger shadow for depth */
+    filter: drop-shadow(0 13px 11px rgba(205, 21, 21, 0.26));
+    perspective: 500px;         /* 3D viewing space — makes rotateY look like real depth */
   }
   .chatbot-robot[hidden] { display: none; }
   .chatbot-robot-svg { display: block; width: 100%; height: auto; }
@@ -213,10 +214,10 @@ const ROBOT_STYLES = `
   .chatbot--open .chatbot-robot { display: none; }
   .chatbot-robot[aria-expanded="true"] { display: none; }
 
-  /* On mobile the hero-right column is hidden (robot went with it).
-     Show the toggle pill so visitors can still open the chat. */
+  /* On mobile the robot floats fixed at the bottom-right corner (see below),
+     so the pill toggle is not needed — the robot IS the trigger. */
   @media (max-width: 700px) {
-    .chatbot--has-robot .chatbot-toggle { display: inline-flex; }
+    .chatbot--has-robot .chatbot-toggle { display: none; }
   }
 
   /* Pause the hero keyword marquee while the chat is open, so nothing
@@ -273,11 +274,18 @@ const ROBOT_STYLES = `
 
   /* Motion — ONLY for people who haven't requested reduced motion. */
   @media (prefers-reduced-motion: no-preference) {
-    .chatbot:not(.chatbot--open) .chatbot-robot-svg {
-      animation: chatbot-float 3s ease-in-out infinite;
+    /* 3D float on the SVG — covers both hero slot (desktop) and chatbot div (mobile) */
+    .chatbot:not(.chatbot--open) .chatbot-robot-svg,
+    .hero-bot-slot .chatbot-robot-svg {
+      animation: chatbot-float 4s ease-in-out infinite;
     }
-    .chatbot:not(.chatbot--open) .chatbot-robot::after {
-      animation: chatbot-shadow 3s ease-in-out infinite;   /* shadow hops in sync */
+    .chatbot:not(.chatbot--open) .chatbot-robot::after,
+    .hero-bot-slot .chatbot-robot::after {
+      animation: chatbot-shadow 4s ease-in-out infinite;
+    }
+    /* Wander only when the robot has been relocated into the hero slot (desktop) */
+    .hero-bot-slot .chatbot-robot:not([aria-expanded="true"]) {
+      animation: chatbot-wander 22s ease-in-out infinite;
     }
     .chatbot-loadbot { animation: chatbot-loadpulse 1.1s ease-in-out infinite; }
     .chatbot-loadbot:nth-child(1) { animation-delay: 0s; }
@@ -289,8 +297,11 @@ const ROBOT_STYLES = `
     .chatbot-loadbot:nth-child(7) { animation-delay: 0.72s; }
   }
   @keyframes chatbot-float {
-    0%, 100% { transform: translateY(0); }
-    50%      { transform: translateY(-10px); }
+    0%   { transform: translateY(0px)   rotateY(0deg)   rotateZ(0deg); }
+    20%  { transform: translateY(-6px)  rotateY(10deg)  rotateZ(1deg); }
+    50%  { transform: translateY(-11px) rotateY(0deg)   rotateZ(0deg); }
+    80%  { transform: translateY(-6px)  rotateY(-10deg) rotateZ(-1deg); }
+    100% { transform: translateY(0px)   rotateY(0deg)   rotateZ(0deg); }
   }
   /* When the robot is up (50%), its ground shadow is smaller & fainter. */
   @keyframes chatbot-shadow {
@@ -302,10 +313,33 @@ const ROBOT_STYLES = `
     50%      { opacity: 0.6; }
   }
 
-  /* On phones, keep the corner placement; just size the robot down. */
+  /* On mobile the robot stays in the chatbot div (not moved to the hero).
+     Position it fixed at the bottom-right corner like a classic chat button. */
   @media (max-width: 700px) {
-    .chatbot-robot { width: 92px; }
-    .chatbot--open .chatbot-robot { width: 74px; margin-bottom: -18px; }
+    .chatbot--has-robot .chatbot-robot {
+      position: fixed;
+      bottom: 24px;
+      right: 20px;
+      width: 80px;
+      z-index: 50;
+    }
+    .chatbot--has-robot .chatbot-robot[aria-expanded="true"] {
+      display: none;
+    }
+  }
+
+  /* Wander: organic drifting path across the hero's right column.
+     Only fires via .hero-bot-slot selector, so mobile (fixed corner) is unaffected. */
+  @keyframes chatbot-wander {
+    0%   { transform: translate(0px,   0px); }
+    10%  { transform: translate(30px, -14px); }
+    22%  { transform: translate(-18px, -32px); }
+    35%  { transform: translate(44px,  18px); }
+    48%  { transform: translate(-10px,  10px); }
+    60%  { transform: translate(36px,  -20px); }
+    72%  { transform: translate(-40px,  -4px); }
+    85%  { transform: translate(16px,   20px); }
+    100% { transform: translate(0px,   0px); }
   }
 `;
 
@@ -587,8 +621,11 @@ function buildChatbot() {
   // right column and wire the speech bubble as an additional trigger.
   const heroSlot   = document.querySelector(".hero-bot-slot");
   const heroBubble = document.querySelector(".hero-bot-bubble");
-  if (heroSlot && hasHero) {
-    heroSlot.appendChild(robot);   // robot lives in the hero, not the chatbot div
+  // On desktop: move the robot into the hero right column so it can wander.
+  // On mobile: leave it in the chatbot div where position:fixed kicks in.
+  const isDesktop = !window.matchMedia("(max-width: 700px)").matches;
+  if (heroSlot && hasHero && isDesktop) {
+    heroSlot.appendChild(robot);
   }
   if (heroBubble) {
     heroBubble.addEventListener("click", () => { if (panel.hidden) setOpen(true); });
