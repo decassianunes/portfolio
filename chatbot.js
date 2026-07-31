@@ -39,6 +39,11 @@ const TOPICS = [
     answer: "Her top skills: Product Design, AI for Design, UX, Interaction Design, and UX Research. Daily sidekicks: Figma AI, Claude, Cursor and other LLMs — plus enough code know-how (GitHub, VS Code) to be dangerous. She built me, after all 🤖",
   },
   {
+    label: "Work",
+    keywords: ["work", "case study", "case studies", "projects", "portfolio", "cases", "design work", "examples", "show me"],
+    answer: "She has 5+ years leading end-to-end design on complex enterprise SaaS products — media management, content creation flows, and more. She owns the full process from discovery and research through to final delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>",
+  },
+  {
     label: "Education",
     keywords: ["education", "study", "studied", "degree", "master", "ma", "university", "qualification"],
     answer: "She holds a BA in Interaction Design from CODE University and an MA in Consumer Behaviour — a fancy way of saying she studies why humans click what they click, then designs around it.",
@@ -66,7 +71,7 @@ const TOPICS = [
 ];
 
 // The friendly first message, and the message shown when nothing matches.
-const GREETING = "Cássia is my favourite Human, and I've got a lot of important and funny info about her. Ask me about her experience, skills, visa, or how to get in touch — just type your question below…";
+const GREETING = "Cássia is my favourite Human — and I can tell you everything about her! 🤖<br><br>She has 5+ years of experience as an AI Product Designer, leading end-to-end design on complex enterprise SaaS products — from media management to content creation flows, owning the full design process from research through to delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>";
 const NO_MATCH = "I'm not human but I also have limitations. Try one of these:";
 
 
@@ -246,6 +251,22 @@ const ROBOT_STYLES = `
 
   /* Header + close button. */
   .chatbot-header { display: flex; align-items: center; justify-content: space-between; }
+  .chatbot-header-actions { display: flex; align-items: center; gap: 12px; }
+  .chatbot-work-link {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+  .chatbot-work-link:hover { color: var(--white); }
+  .chatbot-work-cta {
+    display: inline-block;
+    font-weight: 600;
+    color: var(--red);
+    text-decoration: none;
+  }
+  .chatbot-work-cta:hover { text-decoration: underline; }
   .chatbot-close {
     background: none; border: none; color: var(--white);
     font-size: 22px; line-height: 1; cursor: pointer; padding: 0 2px;
@@ -286,8 +307,7 @@ const ROBOT_STYLES = `
     .hero-bot-slot .chatbot-robot::after {
       animation: chatbot-shadow 4s ease-in-out infinite;
     }
-    .hero-bot-slot .chatbot-robot,
-    .hero-bot-unit .hero-bot-bubble {
+    .hero-bot-unit {
       animation: chatbot-wander 22s ease-in-out infinite;
     }
     .chatbot-loadbot { animation: chatbot-loadpulse 1.1s ease-in-out infinite; }
@@ -378,10 +398,10 @@ function initBubbleTyping() {
   if (!bubble) return;
 
   const messages = [
-    "Got a question about Cássia?",
-    "Ask me about her work →",
-    "I know her pretty well. Ask me!",
+    "Curious about her design work?",
+    "I know her pretty well. Even some embarrassing moments…",
     "Curious about her process?",
+    "What do people say about her?",
   ];
 
   // Replace static HTML with a text span + blinking cursor span.
