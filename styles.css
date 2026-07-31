@@ -176,6 +176,14 @@ a { color: inherit; text-decoration: none; }
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+/* Wrapper that keeps the bubble and robot moving as one unit.
+   The wander animation is applied here so both elements travel together. */
+.hero-bot-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 24px;
 }
 
