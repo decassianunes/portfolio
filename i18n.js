@@ -3,9 +3,9 @@
 // NOTE: German and Portuguese drafted for review by a native speaker.
 const translations = {
   en: {
-    "nav.work": "Work",
+    "nav.work": "Cases",
     "nav.playground": "Playground",
-    "nav.about": "About Me",
+    "nav.about": "About",
     "footer.contact": "Contact",
 
     "hero.tagline":

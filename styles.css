@@ -87,19 +87,18 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
 .lang-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
   font: inherit;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--black);
-  background: var(--white);
-  border: 1px solid var(--gray-line);
-  border-radius: 6px;
-  padding: 5px 10px;
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--red);
+  background: none;
+  border: none;
+  padding: 0;
   cursor: pointer;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition: opacity 0.15s ease;
 }
-.lang-trigger:hover { color: var(--red); border-color: var(--red); }
+.lang-trigger:hover { opacity: 0.7; }
 
 .lang-caret { font-size: 9px; transition: transform 0.15s ease; }
 .lang-select.open .lang-caret { transform: rotate(180deg); }
@@ -135,11 +134,54 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
 
 /* ===== HERO ===== */
 .hero {
-  width: 100%;                 /* fill the width (grid item), then cap below */
+  width: 100%;
   max-width: var(--max-width);
-  margin: 0;                   /* left-aligned (was centered) */
-  padding: 140px 32px 120px;   /* generous whitespace, homepage feel */
+  margin: 0;
+  padding: 80px 32px 100px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
 }
+
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Speech bubble that triggers the chat — sits above the robot in the hero */
+.hero-bot-bubble {
+  width: 100%;
+  background: var(--white);
+  border: 1px solid var(--gray-line);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-family: inherit;
+  font-size: 15px;
+  color: #999;
+  text-align: left;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.hero-bot-bubble:hover { border-color: #bbb; }
+.hero-bot-bubble:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 3px;
+}
+
+/* Slot where chatbot.js moves the robot button on desktop */
+.hero-bot-slot { display: flex; justify-content: center; }
+
+/* Hide the hero right column while the chat panel is open */
+body.chatbot-active .hero-right { visibility: hidden; }
 
 .hero-eyebrow {
   font-size: 16px;
@@ -222,10 +264,10 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
 }
 
 .hero-intro {
-  margin-top: 24px;
-  font-size: clamp(18px, 2.2vw, 24px);   /* now the prominent line (swapped) */
-  font-weight: 500;
-  max-width: 760px;
+  margin-top: 20px;
+  font-size: clamp(15px, 1.4vw, 18px);
+  font-weight: 400;
+  line-height: 1.6;
 }
 
 .hero-cta {
@@ -242,16 +284,16 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
 
 .hero-cta:hover { background: var(--red-50); }   /* 50% red on hover */
 
-/* Subtle primary-action link — guides to the Work page without a heavy button */
+/* Primary CTA link in the hero */
 .hero-link {
   display: inline-block;
-  margin-top: 36px;
-  font-size: 17px;
-  font-weight: 600;
-  color: var(--red);
+  margin-top: 28px;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--black);
   transition: color 0.15s ease;
 }
-.hero-link:hover { text-decoration: underline; }   /* accessible */
+.hero-link:hover { color: var(--red); }
 
 /* Location — lowest priority, muted, at the bottom of the hero */
 .hero-meta {
@@ -447,10 +489,20 @@ body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
   .work-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
+@media (max-width: 700px) {
+  /* Hero collapses to single column; right column (robot + bubble) is hidden.
+     The chatbot toggle pill shows as the fallback trigger on mobile. */
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 60px 24px 60px;
+  }
+  .hero-right { display: none; }
+}
+
 @media (max-width: 520px) {
   .work-grid { grid-template-columns: 1fr; }
   .site-header { flex-direction: column; gap: 12px; align-items: flex-start; }
-  .hero { padding: 72px 24px 60px; }
 }
 
 /* ===== MINI FAQ CHATBOT =====

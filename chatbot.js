@@ -208,8 +208,16 @@ const ROBOT_STYLES = `
     z-index: -1;
   }
 
-  /* When the chat is open, hide the corner robot entirely. */
+  /* When the chat is open, hide the robot — works wherever it lives in the DOM
+     (corner widget OR moved into .hero-bot-slot by the desktop layout). */
   .chatbot--open .chatbot-robot { display: none; }
+  .chatbot-robot[aria-expanded="true"] { display: none; }
+
+  /* On mobile the hero-right column is hidden (robot went with it).
+     Show the toggle pill so visitors can still open the chat. */
+  @media (max-width: 700px) {
+    .chatbot--has-robot .chatbot-toggle { display: inline-flex; }
+  }
 
   /* Pause the hero keyword marquee while the chat is open, so nothing
      competes for attention with the fly-out. */
@@ -574,6 +582,17 @@ function buildChatbot() {
   });
 
   populateChips();   // fill the persistent chip bar above the input
+
+  // On the homepage desktop layout, move the robot button into the hero's
+  // right column and wire the speech bubble as an additional trigger.
+  const heroSlot   = document.querySelector(".hero-bot-slot");
+  const heroBubble = document.querySelector(".hero-bot-bubble");
+  if (heroSlot && hasHero) {
+    heroSlot.appendChild(robot);   // robot lives in the hero, not the chatbot div
+  }
+  if (heroBubble) {
+    heroBubble.addEventListener("click", () => { if (panel.hidden) setOpen(true); });
+  }
 }
 
 // Build the bot once the page is ready.
