@@ -283,8 +283,12 @@ const ROBOT_STYLES = `
     .hero-bot-slot .chatbot-robot::after {
       animation: chatbot-shadow 4s ease-in-out infinite;
     }
-    /* Wander the whole unit (bubble + robot) together on desktop */
-    .hero-bot-unit {
+    /* Wander: apply the same animation to both the robot button and the bubble
+       so they move in lockstep. Animating each element directly avoids the
+       GPU compositing conflict that occurs when the robot's filter:drop-shadow
+       creates its own layer and ignores a parent wrapper's transform. */
+    .hero-bot-slot .chatbot-robot,
+    .hero-bot-unit .hero-bot-bubble {
       animation: chatbot-wander 22s ease-in-out infinite;
     }
     .chatbot-loadbot { animation: chatbot-loadpulse 1.1s ease-in-out infinite; }
