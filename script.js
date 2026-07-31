@@ -1,3 +1,95 @@
+// Mobile hamburger menu — toggles .nav-open on the header.
+const navToggle = document.querySelector(".nav-toggle");
+const siteHeader = document.querySelector(".site-header");
+if (navToggle && siteHeader) {
+  navToggle.addEventListener("click", (e) => {
+    e.stopPropagation();   // prevent the document click-outside handler from firing on this same click
+    const isOpen = siteHeader.classList.toggle("nav-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+  });
+  // Close the menu when any nav link is tapped (so the page navigates cleanly).
+  siteHeader.querySelectorAll(".nav a").forEach((link) => {
+    link.addEventListener("click", () => {
+      siteHeader.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation");
+    });
+  });
+  // Close when clicking outside the header.
+  document.addEventListener("click", (e) => {
+    if (!siteHeader.contains(e.target)) {
+      siteHeader.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Open navigation");
+    }
+  });
+}
+
+// Homepage: when a nav link or "View work" is clicked, animate the hero name
+// flying up into the header logo spot, then navigate to the new page.
+// On inner pages the header name already has a CSS slide-in on page load,
+// giving the impression it arrived from the hero.
+(function initHeroNameFly() {
+  const heroName = document.querySelector('.hero-name');
+  if (!heroName) return;  // only runs on the homepage
+
+  const links = document.querySelectorAll('.nav a, .hero-link');
+  links.forEach(function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      var href = link.href;
+
+      var fromRect = heroName.getBoundingClientRect();
+      var logoEl   = document.querySelector('.logo');
+      var toRect   = logoEl.getBoundingClientRect();
+      var fromSize = parseFloat(getComputedStyle(heroName).fontSize);
+      var toSize   = 18;
+      var scale    = toSize / fromSize;
+
+      // Build a lightweight clone pinned to the hero name's screen position.
+      var fly = document.createElement('span');
+      fly.textContent = heroName.textContent.trim();
+      fly.style.cssText = [
+        'position:fixed',
+        'left:'   + fromRect.left + 'px',
+        'top:'    + fromRect.top  + 'px',
+        'font-size:'   + fromSize + 'px',
+        'font-weight:700',
+        'font-family:inherit',
+        'color:var(--red)',
+        'line-height:1',
+        'white-space:nowrap',
+        'pointer-events:none',
+        'z-index:9999',
+        'transform-origin:left top',
+        'will-change:transform,left,top',
+      ].join(';');
+      document.body.appendChild(fly);
+
+      // Hide the original so there's no double.
+      heroName.style.visibility = 'hidden';
+
+      // Vertical target: centre the shrunken text in the logo link's height.
+      var targetTop = toRect.top + (toRect.height - fromSize * scale) / 2;
+
+      // Two rAF calls let the browser render the start state before animating.
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          var ease = '0.42s cubic-bezier(0.4,0,0.2,1)';
+          fly.style.transition = 'left ' + ease + ', top ' + ease + ', transform ' + ease;
+          fly.style.left      = toRect.left + 'px';
+          fly.style.top       = targetTop   + 'px';
+          fly.style.transform = 'scale(' + scale + ')';
+        });
+      });
+
+      // Navigate once the animation is done (or immediately if it failed).
+      setTimeout(function () { window.location.href = href; }, 460);
+    });
+  });
+})();
+
 // Fill in the current year in the footer automatically (runs on every page).
 const yearEl = document.getElementById("year");
 if (yearEl) {
