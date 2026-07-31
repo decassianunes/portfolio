@@ -502,6 +502,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
 .site-footer a:hover { color: var(--red); text-decoration: underline; }   /* accessible */
 
 .footer-col--right { text-align: right; color: #666; }   /* muted credit */
+.footer-col--right p { margin: 0; }                       /* remove bottom margin so flex centering works */
 
 .footer-copy {
   max-width: var(--max-width);
