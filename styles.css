@@ -45,41 +45,64 @@ a { color: inherit; text-decoration: none; }
   z-index: 10;
 }
 
-.logo { font-weight: 700; font-size: 18px; }
-
-/* Homepage logo → name crossfade.
-   Default: the CN mark shows, the name is collapsed + invisible.
-   After the first click ("click away"), .name-revealed swaps them. */
-.logo--home { display: inline-flex; align-items: center; }
-
-.logo-mark {
-  display: block;
-  height: 40px;
-  width: auto;
-  max-width: 40px;
-  overflow: hidden;
-  opacity: 1;
-  transition: opacity 0.5s ease, max-width 0.5s ease;
+/* Logo link — always present, empty on homepage (name lives in the hero),
+   populated on inner pages. Min-width keeps the tap target reachable. */
+.logo {
+  font-weight: 700;
+  font-size: 18px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
 }
 
+/* The name shown in the header on inner pages — red, matches the hero colour.
+   Slides in on page load to suggest it arrived from the hero section. */
 .logo-name {
   display: inline-block;
+  color: var(--red);
+  font-weight: 700;
+  font-size: 18px;
   white-space: nowrap;
-  overflow: hidden;
-  max-width: 0;
-  opacity: 0;
-  color: var(--black);
-  transition: opacity 0.8s ease, max-width 0.8s ease;
+  animation: logo-arrive 0.45s cubic-bezier(0.2, 0, 0.2, 1) both;
+}
+@keyframes logo-arrive {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-body.name-revealed .logo-mark { opacity: 0; max-width: 0; }
-body.name-revealed .logo-name { opacity: 1; max-width: 240px; }
-
-.nav { display: flex; gap: 28px; }
+.nav { display: flex; gap: 28px; align-items: center; }
 
 .nav a { font-size: 15px; transition: color 0.15s ease; }
 .nav a:hover { color: var(--red); }   /* full red on hover — accessible (5.6:1) */
 .nav a.active { color: var(--red); font-weight: 600; }   /* current page */
+
+/* Hamburger toggle — hidden on desktop, shown on mobile */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.nav-toggle span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--black);
+  border-radius: 2px;
+  transition: transform 0.22s ease, opacity 0.18s ease;
+  transform-origin: center;
+}
+/* Animate the three bars → X when open */
+.site-header.nav-open .nav-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.site-header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.site-header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 /* Custom language dropdown (EN / DE / PT) — white panel, black text, red active */
 .lang-select { position: relative; display: inline-block; }
@@ -490,19 +513,55 @@ body.chatbot-active .hero-right { visibility: hidden; }
 }
 
 @media (max-width: 700px) {
-  /* Hero collapses to single column; right column (robot + bubble) is hidden.
-     The chatbot toggle pill shows as the fallback trigger on mobile. */
+  /* Hero collapses to single column; right column (robot + bubble) is hidden. */
   .hero {
     grid-template-columns: 1fr;
     gap: 0;
     padding: 60px 24px 60px;
   }
   .hero-right { display: none; }
+
+  /* Header: logo left, burger right — single row, no stacking */
+  .site-header {
+    padding: 14px 20px;
+    flex-wrap: wrap;            /* allows nav to drop below on open */
+  }
+  .nav-toggle { display: flex; }   /* reveal the burger button */
+
+  /* Nav hidden by default; drops below the logo row when open */
+  .nav {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    padding: 4px 0 8px;
+  }
+  .site-header.nav-open .nav { display: flex; }
+
+  /* Each link gets its own full-width row with a divider */
+  .nav a {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-line);
+    font-size: 16px;
+  }
+  .nav a:last-of-type { border-bottom: none; }
+
+  /* Language selector sits on its own row inside the open nav */
+  .nav .lang-select {
+    padding: 10px 0;
+  }
+
+  /* Footer: shrink text and gaps so links + copyright stay on one line */
+  .site-footer { padding: 28px 20px; }
+  .footer-inner { gap: 8px 16px; flex-wrap: nowrap; align-items: center; }
+  .footer-links { gap: 12px; }
+  .footer-links a,
+  .footer-col--right p { font-size: 13px; }
+  .footer-col--right { text-align: right; }
 }
 
 @media (max-width: 520px) {
   .work-grid { grid-template-columns: 1fr; }
-  .site-header { flex-direction: column; gap: 12px; align-items: flex-start; }
 }
 
 /* ===== MINI FAQ CHATBOT =====
