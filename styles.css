@@ -55,19 +55,13 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
 }
 
-/* The name shown in the header on inner pages — red, matches the hero colour.
-   Slides in on page load to suggest it arrived from the hero section. */
+/* The name shown in the header on inner pages — black, distinct from the red hero name. */
 .logo-name {
   display: inline-block;
-  color: var(--red);
+  color: var(--black);
   font-weight: 700;
   font-size: 18px;
   white-space: nowrap;
-  animation: logo-arrive 0.45s cubic-bezier(0.2, 0, 0.2, 1) both;
-}
-@keyframes logo-arrive {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 .nav { display: flex; gap: 28px; align-items: center; }
@@ -104,8 +98,8 @@ a { color: inherit; text-decoration: none; }
 .site-header.nav-open .nav-toggle span:nth-child(2) { opacity: 0; transform: scaleX(0); }
 .site-header.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-/* Custom language dropdown (EN / DE / PT) — white panel, black text, red active */
-.lang-select { position: relative; display: inline-block; }
+/* Custom language dropdown (EN / DE / PT) — hidden for now, keeping EN only */
+.lang-select { display: none; }
 
 .lang-trigger {
   display: inline-flex;
@@ -165,6 +159,7 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
+  overflow: hidden;
 }
 
 .hero-left {
@@ -175,20 +170,23 @@ a { color: inherit; text-decoration: none; }
 .hero-right {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 }
 
-/* Wrapper that keeps the bubble and robot moving as one unit.
-   The wander animation is applied here so both elements travel together. */
+/* Wrapper that keeps the bubble and robot as one unit in the hero right column. */
 .hero-bot-unit {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 24px;
+  width: 300px;
+  max-width: 100%;
+  margin-right: 30px;
 }
 
 /* Speech bubble that triggers the chat — sits above the robot in the hero */
 .hero-bot-bubble {
+  position: relative;
   width: 100%;
   background: var(--white);
   border: 1px solid var(--gray-line);
@@ -196,16 +194,39 @@ a { color: inherit; text-decoration: none; }
   padding: 16px 20px;
   font-family: inherit;
   font-size: 15px;
-  color: #999;
+  color: #555;
   text-align: left;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, opacity 0.35s ease;
 }
 .hero-bot-bubble:hover { border-color: #bbb; }
 .hero-bot-bubble:focus-visible {
   outline: 2px solid var(--red);
   outline-offset: 3px;
+}
+/* Tail — two overlapping triangles create a bordered point toward the robot */
+.hero-bot-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 14px solid var(--gray-line);
+  pointer-events: none;
+}
+.hero-bot-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-left: 11px solid transparent;
+  border-right: 11px solid transparent;
+  border-top: 12px solid var(--white);
+  pointer-events: none;
 }
 
 /* Slot where chatbot.js moves the robot button on desktop */
@@ -261,9 +282,10 @@ body.chatbot-active .hero-right { visibility: hidden; }
 
 .hero-keywords {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   list-style: none;
-  margin: 0;
+  margin: 18px 0 0;
   padding: 0;
   font-size: 14px;
   color: #444;
@@ -274,6 +296,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
   margin: 0 0.55em;
   color: #aaa;
 }
+.hero-keywords li:last-child::after { content: none; margin: 0; }
 
 @keyframes keyword-scroll {
   from { transform: translateX(0); }
