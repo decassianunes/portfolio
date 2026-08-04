@@ -173,12 +173,13 @@ a { color: inherit; text-decoration: none; }
   grid-template-columns: 1fr 1fr;
   gap: 48px;
   align-items: center;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .hero-left {
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .hero-right {
@@ -257,11 +258,11 @@ body.chatbot-active .hero-right { visibility: hidden; }
 }
 
 .hero-name {
-  font-size: clamp(44px, 8vw, 96px);   /* scales with screen size */
+  font-size: clamp(44px, 7vw, 72px);
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.02;
-  color: var(--red);          /* name in vivid red */
+  color: var(--red);
 }
 
 /* Keywords marquee — infinite horizontal scroll, clipped to the name's width */
@@ -336,6 +337,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
   font-size: clamp(15px, 1.4vw, 18px);
   font-weight: 400;
   line-height: 1.6;
+  overflow-wrap: break-word;
 }
 
 .hero-cta {
@@ -548,7 +550,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
   .hero {
     grid-template-columns: 1fr;
     gap: 0;
-    padding: 60px 24px 60px;
+    padding: 60px 32px 60px;
   }
   .hero-right { display: none; }
 
@@ -869,4 +871,255 @@ body.chatbot-active .hero-right { visibility: hidden; }
 
 @media (max-width: 520px) {
   .chatbot { right: 16px; bottom: 16px; }
+}
+
+/* ===== WORK CARD — clickable state =====
+   The first card links to a case study; give it a clear hover affordance. */
+a.work-card:hover .thumb { border-color: var(--red); }
+a.work-card:hover .work-card-title { color: var(--red); }
+a.work-card .work-card-title { transition: color 0.15s ease; }
+a.work-card .thumb { transition: border-color 0.15s ease; }
+
+/* ===== CASE STUDY (long-form article pages) ===== */
+.case-study {
+  width: 100%;
+  max-width: 760px;          /* narrower than the 1080 grid — comfortable reading measure */
+  margin: 0 auto;
+  padding: 48px 32px 88px;
+}
+
+/* "← Work" back link at the top */
+.case-study-back {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #777;
+  margin-bottom: 28px;
+  transition: color 0.15s ease;
+}
+.case-study-back:hover { color: var(--red); }
+
+.case-study-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--red);
+  margin-bottom: 14px;
+}
+
+.case-study-title {
+  font-size: clamp(30px, 4.5vw, 46px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* Meta strip (Role / Timeline / Team / Platform) */
+.case-study-meta {
+  margin: 28px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 32px;
+}
+.case-study-meta dt {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+  margin-bottom: 4px;
+}
+.case-study-meta dd {
+  margin: 0;
+  font-size: 15px;
+  color: var(--black);
+  line-height: 1.45;
+}
+
+/* Body typography */
+.case-study h2 {
+  font-size: clamp(22px, 2.4vw, 27px);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 52px 0 18px;
+}
+.case-study h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin: 32px 0 10px;
+}
+.case-study p {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 18px;
+}
+.case-study ul {
+  margin: 0 0 22px;
+  padding-left: 20px;
+}
+.case-study li {
+  font-size: 17px;
+  line-height: 1.7;
+  color: #333;
+  margin-bottom: 10px;
+}
+.case-study strong { color: var(--black); font-weight: 700; }
+.case-study a { color: var(--red); text-decoration: underline; }
+
+/* Divider between major sections */
+.case-study hr {
+  border: none;
+  border-top: 1px solid var(--gray-line);
+  margin: 44px 0;
+}
+
+/* Pull-quote / key takeaway — reuses the red accent bar from the About page */
+.cs-callout {
+  border-left: 3px solid var(--red);
+  padding-left: 18px;
+  margin: 28px 0;
+  font-size: 19px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: var(--black);
+}
+
+/* Image placeholder — grey box matching the work thumbnails */
+.cs-figure { margin: 30px 0; }
+.cs-figure-box {
+  aspect-ratio: 16 / 9;
+  background: var(--gray-thumb);
+  border: 1px solid var(--gray-line);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+}
+.cs-figure-label {
+  font-size: 13px;
+  font-style: italic;
+  color: #9a9a9a;
+  max-width: 340px;
+}
+
+/* Case study on phones — single-column meta, tighter padding */
+@media (max-width: 640px) {
+  .case-study-meta { grid-template-columns: 1fr; gap: 16px; }
+}
+
+/* ===== CASE STUDY — HERO + STICKY SIDE-NAV LAYOUT ===== */
+html { scroll-behavior: smooth; }
+
+/* Back link — pinned at the very top of the page, above the hero */
+.cs-topbar {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 22px 32px 0;
+}
+.cs-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #777;
+  transition: color 0.15s ease;
+}
+.cs-back svg { width: 18px; height: 18px; }
+.cs-back:hover { color: var(--red); }
+
+/* Hero band (full content width, above the two-column body) */
+.cs-hero {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 40px 32px 8px;
+}
+.cs-hero-figure { margin: 0 0 32px; }
+.cs-hero-figure .cs-figure-box { aspect-ratio: 21 / 9; }
+
+/* Two-column body: sticky nav (left) + article (right) */
+.cs-wrap {
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 32px 48px;
+  display: grid;
+  grid-template-columns: 190px minmax(0, 1fr);
+  gap: 56px;
+  align-items: start;
+}
+
+/* Override the earlier single-column article rules for the new layout */
+.case-study {
+  max-width: 720px;
+  margin: 0;
+  padding: 8px 0 40px;
+}
+
+/* Sticky left section-nav */
+.cs-sidenav {
+  position: sticky;
+  top: 96px;                    /* clears the sticky site header */
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cs-sidenav a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 7px 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #a2a2a2;
+  transition: color 0.15s ease;
+}
+.cs-sidenav a:hover { color: var(--black); }
+.cs-sidenav a.is-active { color: var(--red); }
+
+.cs-nav-ico {
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  color: #8a8a8a;
+  transition: color 0.15s ease;
+}
+.cs-nav-ico svg { width: 100%; height: 100%; }
+.cs-sidenav a:hover .cs-nav-ico { color: var(--black); }
+.cs-sidenav a.is-active .cs-nav-ico { color: var(--red); }
+
+/* Small breathing room between HOME · sections · TOP */
+.cs-nav-gap { height: 18px; }
+
+/* Section spacing + scroll offset so headings clear the sticky header */
+.case-study section { scroll-margin-top: 92px; }
+.case-study section + section { margin-top: 56px; }
+.case-study section > h2:first-child { margin-top: 0; }
+
+/* Tablet / phone: drop the side-nav, single readable column */
+@media (max-width: 860px) {
+  .cs-wrap {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 0 32px 40px;
+  }
+  .cs-sidenav { display: none; }
+  .case-study { max-width: 720px; margin: 0 auto; }
+}
+
+@media (max-width: 640px) {
+  .cs-hero { padding: 24px 20px 4px; }
+  .cs-hero-figure .cs-figure-box { aspect-ratio: 16 / 10; }
+  .cs-wrap { padding: 0 20px 40px; }
 }
