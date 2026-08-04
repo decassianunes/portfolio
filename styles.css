@@ -427,6 +427,26 @@ body.chatbot-active .hero-right { visibility: hidden; }
   display: block;
 }
 
+/* "Coming soon" thumbnail — the error robot centred over the grey box. */
+.thumb--soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+.thumb-robot {
+  width: 64px;
+  height: auto;
+}
+.thumb-soon-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #999;
+}
+
 .work-card-title {
   margin-top: 14px;
   font-size: 17px;
