@@ -9,7 +9,7 @@ const translations = {
     "footer.contact": "Contact",
 
     "hero.tagline":
-      "I design end-to-end product experiences for enterprise B2B SaaS. My roots in fashion design and university teaching give me a different perspective on craft, systems, and human behaviour, sharpened by 5+ years in product and an AI-augmented practice.",
+      "I design end-to-end product experiences for enterprise SaaS and B2B. Roots in fashion design and university teaching give me a different lens on craft, systems, and human behaviour — sharpened by 5+ years in product and an AI-augmented practice.",
     "hero.viewWork": "View work →",
 
     "work.title": "Work",
