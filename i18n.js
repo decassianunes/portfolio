@@ -9,7 +9,7 @@ const translations = {
     "footer.contact": "Contact",
 
     "hero.tagline":
-      "I design end-to-end product experiences for enterprise SaaS and B2B. My roots in fashion design and university teaching give me a different perspective on craft, systems, and human behaviour, sharpened by 5+ years in product and an AI-augmented practice.",
+      "I design end-to-end product experiences for enterprise B2B SaaS. My roots in fashion design and university teaching give me a different perspective on craft, systems, and human behaviour, sharpened by 5+ years in product and an AI-augmented practice.",
     "hero.viewWork": "View work →",
 
     "work.title": "Work",
@@ -43,7 +43,7 @@ const translations = {
     "footer.contact": "Kontakt",
 
     "hero.tagline":
-      "Ich gestalte End-to-End-Produkterlebnisse für Enterprise-SaaS und B2B. Meine Wurzeln im Modedesign und in der Hochschullehre geben mir eine andere Perspektive auf Handwerk, Systeme und menschliches Verhalten, geschärft durch 5+ Jahre im Produktdesign und eine KI-gestützte Praxis.",
+      "Ich gestalte End-to-End-Produkterlebnisse für Enterprise-B2B-SaaS. Meine Wurzeln im Modedesign und in der Hochschullehre geben mir eine andere Perspektive auf Handwerk, Systeme und menschliches Verhalten, geschärft durch 5+ Jahre im Produktdesign und eine KI-gestützte Praxis.",
     "hero.viewWork": "Arbeiten ansehen →",
 
     "work.title": "Arbeiten",
@@ -77,7 +77,7 @@ const translations = {
     "footer.contact": "Contato",
 
     "hero.tagline":
-      "Eu projeto experiências de produto de ponta a ponta para SaaS corporativo e B2B. Minhas raízes no design de moda e no ensino universitário me dão uma perspectiva diferente sobre craft, sistemas e comportamento humano, apurada por 5+ anos em produto e uma prática aumentada por IA.",
+      "Eu projeto experiências de produto de ponta a ponta para SaaS B2B corporativo. Minhas raízes no design de moda e no ensino universitário me dão uma perspectiva diferente sobre craft, sistemas e comportamento humano, apurada por 5+ anos em produto e uma prática aumentada por IA.",
     "hero.viewWork": "Ver trabalhos →",
 
     "work.title": "Trabalhos",
