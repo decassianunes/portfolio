@@ -55,13 +55,27 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
 }
 
-/* The name shown in the header on inner pages — black, distinct from the red hero name. */
+/* The name shown in the header on inner pages — black, distinct from the red hero name.
+   Fades in from the left on page load, giving the impression it arrived from the hero fly. */
 .logo-name {
   display: inline-block;
   color: var(--black);
   font-weight: 700;
   font-size: 18px;
   white-space: nowrap;
+  animation: logo-arrive 0.35s ease-out both;
+  transition: color 0.15s ease;
+}
+
+.logo:hover .logo-name { color: var(--red); }
+
+@keyframes logo-arrive {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-name { animation: none; }
 }
 
 .nav { display: flex; gap: 28px; align-items: center; }
@@ -374,7 +388,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
   padding-bottom: 12px;
 }
 
-/* Animated underline — fills left-to-right like a progress bar on load */
+/* Static underline below section titles */
 .section-title::after {
   content: "";
   position: absolute;
@@ -382,22 +396,7 @@ body.chatbot-active .hero-right { visibility: hidden; }
   bottom: 0;
   width: 100%;
   height: 2px;
-  background: var(--red);
-  transform: scaleX(0);
-  transform-origin: left;                 /* grow from the left edge */
-  animation: grow-bar 0.9s ease-out forwards;
-}
-
-@keyframes grow-bar {
-  to { transform: scaleX(1); }
-}
-
-/* Accessibility: respect visitors who prefer reduced motion */
-@media (prefers-reduced-motion: reduce) {
-  .section-title::after {
-    transform: scaleX(1);
-    animation: none;
-  }
+  background: var(--gray-line);
 }
 
 /* ===== WORK GRID ===== */

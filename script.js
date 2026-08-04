@@ -1,3 +1,13 @@
+// If the hero fly animation just delivered the name to the header on the previous page,
+// skip the CSS arrival animation here so the name doesn't visually reload.
+(function () {
+  if (sessionStorage.getItem('logoNameArrived')) {
+    sessionStorage.removeItem('logoNameArrived');
+    var el = document.querySelector('.logo-name');
+    if (el) el.style.animation = 'none';
+  }
+}());
+
 // Mobile hamburger menu — toggles .nav-open on the header.
 const navToggle = document.querySelector(".nav-toggle");
 const siteHeader = document.querySelector(".site-header");
@@ -52,9 +62,9 @@ if (navToggle && siteHeader) {
       fly.textContent = heroName.textContent.trim();
       fly.style.cssText = [
         'position:fixed',
-        'left:'   + fromRect.left + 'px',
-        'top:'    + fromRect.top  + 'px',
-        'font-size:'   + fromSize + 'px',
+        'left:'         + fromRect.left + 'px',
+        'top:'          + fromRect.top  + 'px',
+        'font-size:'    + fromSize + 'px',
         'font-weight:700',
         'font-family:inherit',
         'color:var(--red)',
@@ -63,7 +73,8 @@ if (navToggle && siteHeader) {
         'pointer-events:none',
         'z-index:9999',
         'transform-origin:left top',
-        'will-change:transform,left,top',
+        'transform:translate(0,0) scale(1)',
+        'will-change:transform,opacity',
       ].join(';');
       document.body.appendChild(fly);
 
@@ -72,22 +83,27 @@ if (navToggle && siteHeader) {
 
       // Vertical target: centre the shrunken text in the logo link's height.
       var targetTop = toRect.top + (toRect.height - fromSize * scale) / 2;
+      var dx = toRect.left - fromRect.left;
+      var dy = targetTop   - fromRect.top;
 
       // Two rAF calls let the browser render the start state before animating.
+      // Using transform (not left/top) keeps the animation on the GPU — no jank.
       requestAnimationFrame(function () {
         requestAnimationFrame(function () {
           var ease = '0.42s cubic-bezier(0.4,0,0.2,1)';
-          fly.style.transition = 'left ' + ease + ', top ' + ease + ', transform ' + ease + ', color ' + ease + ', opacity 0.15s linear 0.27s';
-          fly.style.left      = toRect.left + 'px';
-          fly.style.top       = targetTop   + 'px';
-          fly.style.transform = 'scale(' + scale + ')';
-          fly.style.color     = '#111111';
-          fly.style.opacity   = '0';
+          fly.style.transition = 'transform ' + ease + ', color ' + ease + ', opacity 0.15s linear 0.27s';
+          fly.style.transform  = 'translate(' + dx + 'px,' + dy + 'px) scale(' + scale + ')';
+          fly.style.color      = '#111111';
+          fly.style.opacity    = '0';
         });
       });
 
-      // Navigate once the animation is done (or immediately if it failed).
-      setTimeout(function () { window.location.href = href; }, 460);
+      // Navigate once the animation is done. Flag tells the destination page
+      // to skip its own logo arrival animation — the name already "arrived" via the fly.
+      setTimeout(function () {
+        sessionStorage.setItem('logoNameArrived', '1');
+        window.location.href = href;
+      }, 460);
     });
   });
 })();
