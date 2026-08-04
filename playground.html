@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Playground — Cássia Nunes</title>
   <meta name="description" content="Experiments, side projects, and explorations by Cássia Nunes." />
-  <link rel="stylesheet" href="styles.css?v=9" />
+  <link rel="stylesheet" href="styles.css?v=10" />
 </head>
 <body>
 
@@ -31,18 +31,51 @@
     </p>
     <div class="work-grid">
       <!-- Empty thumbnail placeholders. Duplicate a card to add more. -->
+
+      <!-- Error robot (the chatbot's "no answer" bot) defined once here, then
+           referenced by each "Coming soon" card below via <use>. Defined once
+           so the 16-path drawing isn't repeated per card. -->
+      <svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+        <symbol id="robot-error" viewBox="0 0 100 126">
+          <path d="M49.8623 10.3486V25.4013" stroke="#1E1E1E" stroke-opacity="0.4" stroke-width="3.29276" stroke-linecap="round"/>
+          <path d="M43.2764 6.58553C43.2764 10.2202 46.2272 13.1711 49.8619 13.1711C53.4965 13.1711 56.4474 10.2202 56.4474 6.58553C56.4474 2.95088 53.4965 0 49.8619 0C46.2272 0 43.2764 2.95088 43.2764 6.58553V6.58553" fill="#505050" fill-opacity="0.4"/>
+          <path d="M5.17434 46.0986V46.0986C8.03205 46.0986 10.3487 48.4153 10.3487 51.273V63.5032C10.3487 66.3609 8.03205 68.6776 5.17434 68.6776V68.6776C2.31663 68.6776 0 66.3609 0 63.5032V51.273C0 48.4153 2.31663 46.0986 5.17434 46.0986V46.0986" fill="#505050" fill-opacity="0.4"/>
+          <path d="M94.5493 46.0986V46.0986C97.4071 46.0986 99.7237 48.4153 99.7237 51.273V63.5032C99.7237 66.3609 97.4071 68.6776 94.5493 68.6776V68.6776C91.6916 68.6776 89.375 66.3609 89.375 63.5032V51.273C89.375 48.4153 91.6916 46.0986 94.5493 46.0986V46.0986" fill="#505050" fill-opacity="0.4"/>
+          <path d="M30.1053 23.5198H69.6185C82.0801 23.5198 92.1974 33.6371 92.1974 46.0987V61.1514C92.1974 73.613 82.0801 83.7303 69.6185 83.7303H30.1053C17.6437 83.7303 7.52637 73.613 7.52637 61.1514V46.0987C7.52637 33.6371 17.6437 23.5198 30.1053 23.5198V23.5198" fill="white"/>
+          <path d="M30.1053 23.5198H69.6185C82.0801 23.5198 92.1974 33.6371 92.1974 46.0987V61.1514C92.1974 73.613 82.0801 83.7303 69.6185 83.7303H30.1053C17.6437 83.7303 7.52637 73.613 7.52637 61.1514V46.0987C7.52637 33.6371 17.6437 23.5198 30.1053 23.5198V23.5198" stroke="#1E1E1E" stroke-opacity="0.4" stroke-width="2.82237"/>
+          <path d="M34.8098 34.8091H64.9151C73.748 34.8091 80.9085 41.9696 80.9085 50.8025V58.3288C80.9085 67.1617 73.748 74.3222 64.9151 74.3222H34.8098C25.9769 74.3222 18.8164 67.1617 18.8164 58.3288V50.8025C18.8164 41.9696 25.9769 34.8091 34.8098 34.8091V34.8091" fill="#1E1E1E" fill-opacity="0.4"/>
+          <path d="M29.917 52.2137C37.0158 52.2136 36.2485 52.2136 42.1473 52.2137M56.7708 52.2141C63.8696 52.2141 63.1023 52.214 69.0011 52.2141" stroke="white" stroke-width="4.23355" stroke-linecap="round"/>
+          <path d="M39.5133 86.5525H60.2107C69.5569 86.5525 77.1449 94.1405 77.1449 103.487V107.25C77.1449 116.596 69.5569 124.184 60.2107 124.184H39.5133C30.1671 124.184 22.5791 116.596 22.5791 107.25V103.487C22.5791 94.1405 30.1671 86.5525 39.5133 86.5525V86.5525" fill="white"/>
+          <path d="M39.5133 86.5525H60.2107C69.5569 86.5525 77.1449 94.1405 77.1449 103.487V107.25C77.1449 116.596 69.5569 124.184 60.2107 124.184H39.5133C30.1671 124.184 22.5791 116.596 22.5791 107.25V103.487C22.5791 94.1405 30.1671 86.5525 39.5133 86.5525V86.5525" stroke="#1E1E1E" stroke-opacity="0.4" stroke-width="2.82237"/>
+          <path opacity="0.9" d="M42.8066 105.368C42.8066 109.263 45.9683 112.424 49.8626 112.424C53.7568 112.424 56.9185 109.263 56.9185 105.368C56.9185 101.474 53.7568 98.3125 49.8626 98.3125C45.9683 98.3125 42.8066 101.474 42.8066 105.368V105.368" fill="#505050" fill-opacity="0.4"/>
+          <path d="M11.2893 90.3159V90.3159C14.4047 90.3159 16.934 92.8452 16.934 95.9607V110.072C16.934 113.188 14.4047 115.717 11.2893 115.717V115.717C8.17385 115.717 5.64453 113.188 5.64453 110.072V95.9607C5.64453 92.8452 8.17385 90.3159 11.2893 90.3159V90.3159" fill="white"/>
+          <path d="M11.2893 90.3159V90.3159C14.4047 90.3159 16.934 92.8452 16.934 95.9607V110.072C16.934 113.188 14.4047 115.717 11.2893 115.717V115.717C8.17385 115.717 5.64453 113.188 5.64453 110.072V95.9607C5.64453 92.8452 8.17385 90.3159 11.2893 90.3159V90.3159" stroke="#1E1E1E" stroke-opacity="0.4" stroke-width="2.82237"/>
+          <path d="M88.4348 90.3159V90.3159C91.5502 90.3159 94.0795 92.8452 94.0795 95.9607V110.072C94.0795 113.188 91.5502 115.717 88.4348 115.717V115.717C85.3194 115.717 82.79 113.188 82.79 110.072V95.9607C82.79 92.8452 85.3194 90.3159 88.4348 90.3159V90.3159" fill="white"/>
+          <path d="M88.4348 90.3159V90.3159C91.5502 90.3159 94.0795 92.8452 94.0795 95.9607V110.072C94.0795 113.188 91.5502 115.717 88.4348 115.717V115.717C85.3194 115.717 82.79 113.188 82.79 110.072V95.9607C82.79 92.8452 85.3194 90.3159 88.4348 90.3159V90.3159" stroke="#1E1E1E" stroke-opacity="0.4" stroke-width="2.82237"/>
+        </symbol>
+      </svg>
+
       <div class="work-card">
-        <div class="thumb"></div>
+        <div class="thumb thumb--soon">
+          <svg class="thumb-robot" viewBox="0 0 100 126" aria-hidden="true" focusable="false"><use href="#robot-error"/></svg>
+          <span class="thumb-soon-label">Coming soon</span>
+        </div>
         <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
         <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
       <div class="work-card">
-        <div class="thumb"></div>
+        <div class="thumb thumb--soon">
+          <svg class="thumb-robot" viewBox="0 0 100 126" aria-hidden="true" focusable="false"><use href="#robot-error"/></svg>
+          <span class="thumb-soon-label">Coming soon</span>
+        </div>
         <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
         <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
       <div class="work-card">
-        <div class="thumb"></div>
+        <div class="thumb thumb--soon">
+          <svg class="thumb-robot" viewBox="0 0 100 126" aria-hidden="true" focusable="false"><use href="#robot-error"/></svg>
+          <span class="thumb-soon-label">Coming soon</span>
+        </div>
         <h3 class="work-card-title" data-i18n="playground.expTitle">Experiment title</h3>
         <p class="work-card-meta" data-i18n="playground.expMeta">Type · Year</p>
       </div>
