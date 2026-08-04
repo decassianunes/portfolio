@@ -1,8 +1,8 @@
 # Media Management Ecosystem for a B2B SaaS Platform
 
-**Role:** Product Designer (end-to-end: discovery → UX / UI → hand-off → implementation support → analytics → iterations)
+**Role:** Product Designer Lead: from discovery to implementation
 **Timeline:** ~4 years
-**Team:** Me (Product Designer), Product Manager, Frontend & Backend engineers, Copywriting
+**Team:** Me (Product Designer), Product Manager, Researchers, Frontend & Backend engineers, Copywriting, as well as cross-product collaborations
 **Platform:** An employee-communication SaaS
 
 <!-- IMAGE: hero shot — the final, polished File Manager UI (the "money shot") -->

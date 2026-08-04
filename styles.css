@@ -7,6 +7,7 @@
   --red-50: #E68A8A;        /* vivid red at ~50% (mixed with white) — used on hover */
   --red-deep: #860303;      /* darker red — chatbot header + user bubble, so they don't clash with the action red */
   --red-pill: #8F0909;      /* active chatbot chip — red outline + text on hover/focus */
+  --red-highlight: #8F0909; /* deep maroon — case-study highlights (title, label, headings, active nav) */
   --gray-line: #E7E7E7;     /* subtle borders for empty thumbnails */
   --gray-border: #D4D4D4;   /* slightly stronger neutral — chatbot chips at rest */
   --gray-thumb: #F4F4F4;    /* empty thumbnail fill */
@@ -415,6 +416,15 @@ body.chatbot-active .hero-right { visibility: hidden; }
   background: var(--gray-thumb);
   border: 1px solid var(--gray-line);
   border-radius: 8px;
+  overflow: hidden;            /* clip a filled image to the rounded corners */
+}
+
+/* An image that fills a thumbnail — crops to the same 4:3 shape. */
+.thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .work-card-title {
@@ -911,7 +921,7 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--red);
+  color: var(--red-highlight);
   margin-bottom: 14px;
 }
 
@@ -922,12 +932,15 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   line-height: 1.1;
 }
 
-/* Meta strip (Role / Timeline / Team / Platform) */
+/* Meta card (Role / Timeline / Team / Platform) — bordered rounded box */
 .case-study-meta {
   margin: 28px 0 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 32px;
+  border: 1px solid var(--gray-line);
+  border-radius: 12px;
+  padding: 26px 30px;
 }
 .case-study-meta dt {
   font-size: 11px;
@@ -1016,7 +1029,7 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
 
 /* Case study on phones — single-column meta, tighter padding */
 @media (max-width: 640px) {
-  .case-study-meta { grid-template-columns: 1fr; gap: 16px; }
+  .case-study-meta { grid-template-columns: 1fr; gap: 16px; padding: 22px 22px; }
 }
 
 /* ===== CASE STUDY — HERO + STICKY SIDE-NAV LAYOUT ===== */
@@ -1048,8 +1061,17 @@ html { scroll-behavior: smooth; }
   margin: 0 auto;
   padding: 40px 32px 8px;
 }
-.cs-hero-figure { margin: 0 0 32px; }
+.cs-hero-figure { margin: 40px 0 32px; }
 .cs-hero-figure .cs-figure-box { aspect-ratio: 21 / 9; }
+
+/* Static hero image — soft-framed. (Temporary stand-in for a future animated walkthrough.) */
+.cs-hero-img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--gray-line);
+  border-radius: 10px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
 
 /* Two-column body: sticky nav (left) + article (right) */
 .cs-wrap {
@@ -1092,7 +1114,7 @@ html { scroll-behavior: smooth; }
   transition: color 0.15s ease;
 }
 .cs-sidenav a:hover { color: var(--black); }
-.cs-sidenav a.is-active { color: var(--red); }
+.cs-sidenav a.is-active { color: var(--red-highlight); }
 
 .cs-nav-ico {
   display: inline-flex;
@@ -1104,7 +1126,7 @@ html { scroll-behavior: smooth; }
 }
 .cs-nav-ico svg { width: 100%; height: 100%; }
 .cs-sidenav a:hover .cs-nav-ico { color: var(--black); }
-.cs-sidenav a.is-active .cs-nav-ico { color: var(--red); }
+.cs-sidenav a.is-active .cs-nav-ico { color: var(--red-highlight); }
 
 /* Small breathing room between HOME · sections · TOP */
 .cs-nav-gap { height: 18px; }
