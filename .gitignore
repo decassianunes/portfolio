@@ -8,5 +8,9 @@ conversation_logs/
 # Personal documents (CV etc.) — never upload to the public repo
 *.pdf
 
+# Figma / FigJam source files — huge binaries, never upload to the public repo
+*.jam
+*.fig
+
 # macOS clutter
 .DS_Store
