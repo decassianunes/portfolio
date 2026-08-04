@@ -1,4 +1,4 @@
-# Media Management Ecosystem for a Content Studio
+# Media Management Ecosystem for a B2B SaaS Platform
 
 **Role:** Product Designer (end-to-end: discovery → UX / UI → hand-off → implementation support → analytics → iterations)
 **Timeline:** ~4 years
