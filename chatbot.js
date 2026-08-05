@@ -72,7 +72,7 @@ const TOPICS = [
 
 // The friendly first message, and the message shown when nothing matches.
 const GREETING = "Cássia is my favourite Human — and I can tell you everything about her! 🤖<br><br>She has 5+ years of experience as an AI Product Designer, leading end-to-end design on complex enterprise SaaS products — from media management to content creation flows, owning the full design process from research through to delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>";
-const NO_MATCH = "I'm not human but I also have limitations. Try one of these:";
+const NO_MATCH = "Like a human, I also have some limitations. Try some of the topics below.";
 
 
 // ---- 2. FIND THE BEST ANSWER -------------------------------
@@ -399,7 +399,7 @@ function initBubbleTyping() {
 
   const messages = [
     "Curious about her design work?",
-    "I know her pretty well. Even some embarrassing moments…",
+    "I know her very well. I could even tell you a few fun stories…",
     "Curious about her process?",
     "What do people say about her?",
   ];

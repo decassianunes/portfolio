@@ -438,6 +438,11 @@ body.chatbot-active .hero-right { visibility: hidden; }
 .thumb-robot {
   width: 64px;
   height: auto;
+  /* Same artwork as the chatbot's "no answer" robot. Its outline shapes have
+     no fill attribute, so without this they'd default to solid black. Setting
+     fill:none here lets the stroke-only paths stay outlines (the filled paths
+     keep their own colors), matching how the robot looks inside the chatbot. */
+  fill: none;
 }
 .thumb-soon-label {
   font-size: 12px;
