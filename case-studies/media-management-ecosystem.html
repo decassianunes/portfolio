@@ -117,26 +117,31 @@
 
       <section id="problem">
         <h2>Problem</h2>
-        <p>Imagine you need to create content at an enterprise level — you need a dedicated tool, with a set of tools inside it, to do so. In this project, that tool was called Experience Studio. It’s where companies build the content their employees read — news, pages, emails, campaigns. And a big chunk of that content is media. The problem started when the Studio couldn’t give good support for handling that media.</p>
+        <p>Experience Studio is where companies build the content their employees read: news, pages, emails, campaigns. A big part of that content is media: images, documents, video. And media was exactly where the Studio fell short.</p>
+        <p>The team came to me with a narrow request: <em>let users delete their files.</em> But as I dug into why deletion was even a problem, a bigger pattern surfaced. Deletion was just one missing piece of a tool that had no real system for managing media at all. That reframed the work. The question stopped being “how do we add a delete button” and became “How do we enable our users to manage and reuse media files inside our platform?”</p>
         <p>The product has two sides:</p>
         <ul>
-          <li><strong>The Studio</strong> — where <strong>admins</strong> and <strong>editors</strong> create content.</li>
-          <li><strong>The App</strong> — where <strong>employees</strong> consume that content.</li>
+          <li><strong>The Studio</strong>, where admins and editors create content.</li>
+          <li><strong>The App</strong>, where employees consume it.</li>
         </ul>
         <p>My scope was the Studio, and the two roles who live there:</p>
         <ul>
-          <li><strong>Claire, the Admin</strong> — responsible for making sure editors use the <em>correct</em>, approved, up-to-date assets across the whole company.</li>
-          <li><strong>Joe, the Content Creator / Editor</strong> — focused on creating and publishing content, who just wants to <em>reuse</em> the right files without friction.</li>
+          <li><strong>Amara, the Admin</strong>: keeps the whole company on the <em>correct</em>, approved, up-to-date assets.</li>
+          <li><strong>Leo, the Editor</strong>: just wants to <em>reuse</em> the right files and publish without friction.</li>
         </ul>
-        <p>When I picked up this work, handling media in the Studio meant:</p>
+        <p>When I picked up this work, managing media in the Studio meant:</p>
         <ul>
-          <li><strong>A complex, unfriendly upload flow</strong> — an overloaded editor toolbar with too many media icons and high cognitive load (3 different upload buttons vs. drag-and-drop vs. media widgets).</li>
-          <li><strong>No way to reuse files</strong> — every use meant a fresh upload, even for the same asset.</li>
-          <li><strong>No upload feedback</strong> — no progress indicator, no clear error messages.</li>
-          <li><strong>No way to delete or replace files</strong> — outdated documents lived on across published pages with no clean way to update them.</li>
-          <li><strong>No sharing and no collaboration</strong> — admins couldn’t hand editors a curated set of approved assets, so teams leaned on external tools like Google Drive and Canva. That broke the content-creation flow and pulled work outside the Studio.</li>
+          <li><strong>A confusing upload flow.</strong> An overloaded toolbar with three separate upload buttons, plus drag-and-drop and media widgets. Too many ways to do one thing.</li>
+          <li><strong>No reuse.</strong> Every use of a file meant a fresh upload, even for the same asset.</li>
+          <li><strong>No feedback.</strong> No upload progress, no clear errors.</li>
+          <li><strong>No way to delete or replace.</strong> Outdated documents lived on across published pages with no clean way to update them.</li>
+          <li><strong>No sharing or collaboration.</strong> Admins couldn’t hand editors a curated set of approved assets, so teams fell back on Google Drive and Canva, pulling work outside the Studio entirely.</li>
         </ul>
-        <p>In short: the Studio had no central, trustworthy home for company media. That was both a daily usability pain <em>and</em> a business opportunity — every file managed in an external tool was value leaving the product.</p>
+        <figure class="cs-figure">
+          <img class="cs-hero-img" src="images/oldstudioupload.png" alt="The original Experience Studio editor and its cluttered media upload flow" />
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 4px;">The real start of the problem: the upload flow.</figcaption>
+        </figure>
+        <p>In short: the Studio had no central, trustworthy home for company media. That was a daily usability pain <em>and</em> a business problem: every file managed in an external tool was value leaving the product.</p>
       </section>
 
       <section id="approach">
