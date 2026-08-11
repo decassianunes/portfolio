@@ -1032,6 +1032,32 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   color: var(--black);
 }
 
+/* Customer citation — pull-quote card with a red accent */
+.cs-quote {
+  position: relative;
+  margin: 32px 0;
+  padding: 26px 30px 26px 34px;
+  background: var(--gray-thumb);
+  border-left: 4px solid var(--red);
+  border-radius: 8px;
+}
+.cs-quote-text {
+  margin: 0;
+  font-size: 19px;
+  line-height: 1.6;
+  font-style: italic;
+  color: var(--black);
+}
+.cs-quote-cite {
+  display: block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--red-highlight);
+}
+
 /* Image placeholder — grey box matching the work thumbnails */
 .cs-figure { margin: 30px 0; }
 .cs-figure-box {

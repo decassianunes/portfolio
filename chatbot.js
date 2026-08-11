@@ -29,35 +29,35 @@ const TOPICS = [
     keywords: ["experience", "years", "background", "career", "work history", "senior", "history"],
     answer:
       "5+ years of design, greatest hits (most recent first):<br>" +
-      "🏢 <strong>Staffbase</strong> (2021–2026) — Product Designer on an enterprise intranet used by 2,000+ companies (Adidas, DHL &amp; co.). Shipped 15+ features and even taught an AI to write subtitles.<br>" +
-      "🎓 <strong>ReDI School</strong> (2021–2025) — UI/UX mentor guiding women &amp; newcomers into tech, 4 cohorts strong.<br>" +
-      "🎨 <strong>CODE University</strong> (2021) — Visual Designer who gave Demo Day its whole look.",
+      "🏢 <strong>Staffbase</strong> (2021–2026): Product Designer on an enterprise intranet used by 2,000+ companies (Adidas, DHL &amp; co.). Shipped 15+ features and even taught an AI to write subtitles.<br>" +
+      "🎓 <strong>ReDI School</strong> (2021–2025): UI/UX mentor guiding women &amp; newcomers into tech, 4 cohorts strong.<br>" +
+      "🎨 <strong>CODE University</strong> (2021): Visual Designer who gave Demo Day its whole look.",
   },
   {
     label: "Skills & tools",
     keywords: ["skill", "skills", "tools", "figma", "ai", "research", "design system", "stack", "software"],
-    answer: "Her top skills: Product Design, AI for Design, UX, Interaction Design, and UX Research. Daily sidekicks: Figma AI, Claude, Cursor and other LLMs — plus enough code know-how (GitHub, VS Code) to be dangerous. She built me, after all 🤖",
+    answer: "Her top skills: Product Design, AI for Design, UX, Interaction Design, and UX Research. Daily sidekicks: Figma AI, Claude, Cursor and other LLMs, plus enough code know-how (GitHub, VS Code) to be dangerous. She built me, after all 🤖",
   },
   {
     label: "Work",
     keywords: ["work", "case study", "case studies", "projects", "portfolio", "cases", "design work", "examples", "show me"],
-    answer: "She has 5+ years leading end-to-end design on complex enterprise SaaS products — media management, content creation flows, and more. She owns the full process from discovery and research through to final delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>",
+    answer: "She has 5+ years leading end-to-end design on complex enterprise SaaS products: media management, content creation flows, and more. She owns the full process from discovery and research through to final delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>",
   },
   {
     label: "Education",
     keywords: ["education", "study", "studied", "degree", "master", "ma", "university", "qualification"],
-    answer: "She holds a BA in Interaction Design from CODE University and an MA in Consumer Behaviour — a fancy way of saying she studies why humans click what they click, then designs around it.",
+    answer: "She holds a BA in Interaction Design from CODE University and an MA in Consumer Behaviour, a fancy way of saying she studies why humans click what they click, then designs around it.",
   },
   {
     label: "Location",
     keywords: ["location", "where", "based", "berlin", "city", "country", "remote", "germany"],
-    answer: "She's based in Berlin, Germany — where the coffee is strong and the UX is sharp.",
+    answer: "She's based in Berlin, Germany, where the coffee is strong and the UX is sharp.",
   },
   {
     label: "The Human",
     keywords: ["fun", "fun fact", "fun facts", "person", "personal", "personality", "human", "hobby", "hobbies", "interests", "life", "herself", "vibe", "wine", "cycling", "cycle", "bike", "brazil", "team", "teamwork"],
     answer:
-      "Beyond the pixels: she's a genuine team player who's spent years working shoulder-to-shoulder with international colleagues. Off the clock she's learning to ride a bike as an adult — while being terrified of cars 🚲. She will not stop talking about Brazil 🇧🇷, and she never says no to a good glass of wine 🍷.",
+      "Beyond the pixels: she's a genuine team player who's spent years working shoulder-to-shoulder with international colleagues. Off the clock she's learning to ride a bike as an adult, while being terrified of cars 🚲. She will not stop talking about Brazil 🇧🇷, and she never says no to a good glass of wine 🍷.",
   },
   {
     label: "Contact",
@@ -71,7 +71,7 @@ const TOPICS = [
 ];
 
 // The friendly first message, and the message shown when nothing matches.
-const GREETING = "Cássia is my favourite Human — and I can tell you everything about her! 🤖<br><br>She has 5+ years of experience as an AI Product Designer, leading end-to-end design on complex enterprise SaaS products — from media management to content creation flows, owning the full design process from research through to delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>";
+const GREETING = "Cássia is my favourite Human, and I can tell you everything about her! 🤖<br><br>She has 5+ years of experience as an AI Product Designer, leading end-to-end design on complex enterprise SaaS products: from media management to content creation flows, owning the full design process from research through to delivery.<br><br><a href='work.html' class='chatbot-work-cta'>See all her case studies →</a>";
 const NO_MATCH = "Like a human, I also have some limitations. Try some of the topics below.";
 
 
@@ -455,7 +455,7 @@ function buildChatbot() {
   // column is pinned to the bottom-right, this puts the robot in the corner
   // when closed and perched above the panel when open.
   root.innerHTML = `
-    <button class="chatbot-robot" aria-label="Open chat — ask me about Cássia" aria-expanded="false"${hasHero ? "" : " hidden"}>
+    <button class="chatbot-robot" aria-label="Open chat, ask me about Cássia" aria-expanded="false"${hasHero ? "" : " hidden"}>
       ${ROBOT_ACTIVE_SVG}
     </button>
     <div class="chatbot-panel" role="dialog" aria-modal="true" aria-label="Ask me about Cássia" hidden>
