@@ -9,7 +9,7 @@ const translations = {
     "footer.contact": "Contact",
 
     "hero.tagline":
-      "I design end-to-end product experiences for enterprise SaaS and B2B. Roots in fashion design and university teaching give me a different lens on craft, systems, and human behaviour — sharpened by 5+ years in product and an AI-augmented practice.",
+      "I design end-to-end product experiences for enterprise SaaS and B2B. Roots in fashion design and university teaching give me a different lens on craft, systems, and human behaviour, sharpened by 5+ years in product and an AI-augmented practice.",
     "hero.viewWork": "View work →",
 
     "work.title": "Work",
@@ -18,19 +18,19 @@ const translations = {
 
     "playground.title": "Playground",
     "playground.intro":
-      "Experiments, side projects, and things I'm exploring — including AI-augmented design.",
+      "Experiments, side projects, and things I'm exploring, including AI-augmented design.",
     "playground.expTitle": "Experiment title",
     "playground.expMeta": "Type · Year",
 
     "about.title": "About Me",
     "about.p1":
-      "I'm a Product Designer with 5+ years of experience in UX design and interaction design for enterprise SaaS products — now combining that foundation with an AI-augmented design practice.",
+      "I'm a Product Designer with 5+ years of experience in UX design and interaction design for enterprise SaaS products, now combining that foundation with an AI-augmented design practice.",
     "about.p2":
-      "I have a proven track record in end-to-end product design — from user research and usability testing through prototyping and delivery — working within cross-functional agile teams. I use AI tools actively across my workflow: accelerating discovery, generating and stress-testing design concepts, and prototyping faster without sacrificing user-centricity.",
+      "I have a proven track record in end-to-end product design, from user research and usability testing through prototyping and delivery, working within cross-functional agile teams. I use AI tools actively across my workflow: accelerating discovery, generating and stress-testing design concepts, and prototyping faster without sacrificing user-centricity.",
     "about.p3":
-      "My background combines hands-on UX practice with an MA in Consumer Behaviour, a working knowledge of code environments (GitHub, VS Code), and daily use of tools like Figma AI, Claude, Cursor, and LLMs — bringing research rigour, design systems thinking, and modern AI fluency to complex product challenges.",
+      "My background combines hands-on UX practice with an MA in Consumer Behaviour, a working knowledge of code environments (GitHub, VS Code), and daily use of tools like Figma AI, Claude, Cursor, and LLMs, bringing research rigour, design systems thinking, and modern AI fluency to complex product challenges.",
     "about.highlight":
-      "I believe the best designers right now aren't the ones who fear AI — they're the ones who know how to direct it.",
+      "I believe the best designers right now aren't the ones who fear AI. They're the ones who know how to direct it.",
     "about.skillsLabel": "Top skills",
     "about.skills":
       "Product Design · Artificial Intelligence for Design · User Experience (UX) · Interaction Design · UX Research",
@@ -86,19 +86,19 @@ const translations = {
 
     "playground.title": "Playground",
     "playground.intro":
-      "Experimentos, projetos paralelos e coisas que estou explorando — incluindo design aumentado por IA.",
+      "Experimentos, projetos paralelos e coisas que estou explorando, incluindo design aumentado por IA.",
     "playground.expTitle": "Título do experimento",
     "playground.expMeta": "Tipo · Ano",
 
     "about.title": "Sobre mim",
     "about.p1":
-      "Sou Product Designer com mais de 5 anos de experiência em UX design e design de interação para produtos SaaS corporativos — e agora combino essa base com uma prática de design aumentada por IA.",
+      "Sou Product Designer com mais de 5 anos de experiência em UX design e design de interação para produtos SaaS corporativos, e agora combino essa base com uma prática de design aumentada por IA.",
     "about.p2":
-      "Tenho um histórico comprovado em design de produto de ponta a ponta — de pesquisa com usuários e testes de usabilidade a prototipagem e entrega — atuando em times ágeis multifuncionais. Uso ferramentas de IA ativamente em todo o meu fluxo de trabalho: acelerando a descoberta, gerando e testando conceitos de design e prototipando mais rápido sem abrir mão da centralidade no usuário.",
+      "Tenho um histórico comprovado em design de produto de ponta a ponta, de pesquisa com usuários e testes de usabilidade a prototipagem e entrega, atuando em times ágeis multifuncionais. Uso ferramentas de IA ativamente em todo o meu fluxo de trabalho: acelerando a descoberta, gerando e testando conceitos de design e prototipando mais rápido sem abrir mão da centralidade no usuário.",
     "about.p3":
-      "Minha formação combina prática em UX com um mestrado em Comportamento do Consumidor, conhecimento prático de ambientes de código (GitHub, VS Code) e uso diário de ferramentas como Figma AI, Claude, Cursor e LLMs — trazendo rigor de pesquisa, pensamento de design systems e fluência moderna em IA para desafios de produto complexos.",
+      "Minha formação combina prática em UX com um mestrado em Comportamento do Consumidor, conhecimento prático de ambientes de código (GitHub, VS Code) e uso diário de ferramentas como Figma AI, Claude, Cursor e LLMs, trazendo rigor de pesquisa, pensamento de design systems e fluência moderna em IA para desafios de produto complexos.",
     "about.highlight":
-      "Acredito que os melhores designers hoje não são os que temem a IA — são os que sabem como direcioná-la.",
+      "Acredito que os melhores designers hoje não são os que temem a IA. São os que sabem como direcioná-la.",
     "about.skillsLabel": "Principais habilidades",
     "about.skills":
       "Design de Produto · Inteligência Artificial para Design · Experiência do Usuário (UX) · Design de Interação · Pesquisa em UX",
