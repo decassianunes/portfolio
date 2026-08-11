@@ -13,5 +13,8 @@ conversation_logs/
 *.jam
 *.fig
 
+# Source video — huge binary; only the compressed .mp4 ships to the site
+*.mov
+
 # macOS clutter
 .DS_Store
