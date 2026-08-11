@@ -92,7 +92,9 @@ Because the ecosystem became genuinely complex, I built a feature-architecture s
 
 ## Solution
 
-The core structural decision was to split the experience by role, then connect the two halves:
+To help our users and close the gap our product was suffering from, we decided to keep developing the Media Management Ecosystem. We invested in a role-based solution, while keeping its integration with the rest of our product portfolio in mind: the email module, internal plugins like Microsoft SharePoint, calendar and planning, external digital asset management systems (DAMs), and others.
+
+That meant splitting the experience by role, then connecting the two halves:
 
 - **My Files (editor-facing)** lives inside the content-creation flow. Editors upload new files, reuse their own previous uploads from many entry points (media plugins, email, widgets), and access collections that admins have shared with them. The guiding principle: *in the editor’s world, the goal is to create content, not to manage files.*
 - **File Manager (admin-facing)**: a dedicated, global interface for admins to upload, search, filter, organize, share, delete, replace, and analyze files across the whole platform. The guiding principle: *give admins real control and oversight, in a space designed for management, not content creation.*
