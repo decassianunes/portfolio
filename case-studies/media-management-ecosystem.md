@@ -92,7 +92,7 @@ Because the ecosystem became genuinely complex, I built a feature-architecture s
 
 ## Solution
 
-To help our users and close the gap our product was suffering from, we decided to keep developing the Media Management Ecosystem. We invested in a role-based solution, while keeping its integration with the rest of our product portfolio in mind: the email module, internal plugins like Microsoft SharePoint, calendar and planning, external digital asset management systems (DAMs), and others.
+To close a real gap for our users, I pushed to keep developing the Media Management Ecosystem as a role-based solution, designed from the start to integrate with the rest of the product portfolio: the email module, internal plugins like Microsoft SharePoint, calendar and planning, external digital asset management systems (DAMs), and others.
 
 That meant splitting the experience by role, then connecting the two halves:
 
