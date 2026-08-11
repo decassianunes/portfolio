@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Media Management Ecosystem | Cássia Nunes</title>
   <meta name="description" content="Case study: designing a connected media-management ecosystem (My Files + File Manager) for an enterprise B2B SaaS." />
-  <link rel="stylesheet" href="../styles.css?v=9" />
+  <link rel="stylesheet" href="../styles.css?v=10" />
 </head>
 <body>
 
@@ -33,29 +33,14 @@
 
   <!-- ===== HERO ===== -->
   <section class="cs-hero" id="top">
-    <p class="case-study-eyebrow">Case study</p>
-    <h1 class="case-study-title">Media Management Ecosystem for a B2B SaaS Platform</h1>
-    <dl class="case-study-meta">
-      <div>
-        <dt>Role</dt>
-        <dd>Product Designer Lead: from discovery to implementation</dd>
-      </div>
-      <div>
-        <dt>Timeline</dt>
-        <dd>~4 years</dd>
-      </div>
-      <div>
-        <dt>Team</dt>
-        <dd>Me (Product Designer), Product Manager, Researchers, Frontend &amp; Backend engineers, Copywriting, as well as cross-product collaborations</dd>
-      </div>
-      <div>
-        <dt>Platform</dt>
-        <dd>An employee-communication SaaS</dd>
-      </div>
-    </dl>
-    <!-- Static hero image for now; this single slot will later be swapped for an animated walkthrough. -->
+    <h1 class="case-study-title">Media Management Ecosystem for B2B SaaS</h1>
+    <!-- Animated walkthrough of the shipped File Manager; poster shows the static image while it loads / as a fallback. -->
     <figure class="cs-figure cs-hero-figure">
-      <img class="cs-hero-img" src="images/file-manager-hero.png?v=2" alt="File Manager, the shipped media-management UI" />
+      <video class="cs-hero-img" autoplay muted loop playsinline
+             poster="images/file-manager-hero.png?v=2"
+             aria-label="File Manager, the shipped media-management UI, in use">
+        <source src="images/file-manager-hero.mp4" type="video/mp4" />
+      </video>
     </figure>
   </section>
 
@@ -106,6 +91,24 @@
 
       <section id="tldr">
         <h2>Overview</h2>
+        <dl class="case-study-meta">
+          <div>
+            <dt>Role</dt>
+            <dd>Product Designer Lead: from discovery to implementation</dd>
+          </div>
+          <div>
+            <dt>Timeline</dt>
+            <dd>~4 years</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>Me (Product Designer), Product Manager, Researchers, Frontend &amp; Backend engineers, Copywriting, as well as cross-product collaborations</dd>
+          </div>
+          <div>
+            <dt>Platform</dt>
+            <dd>An employee-communication SaaS</dd>
+          </div>
+        </dl>
         <p>Over roughly four years I led the development of a connected media-management ecosystem for Staffbase. I owned this work end-to-end, from discovery through UX/UI, hand-off, implementation, and iteration.</p>
         <p>That long design process produced a system of two complementary features: My Files (for content editors) and File Manager (for admins), turning scattered, one-off uploads into a central, permission-aware system for uploading, reusing, managing, organizing, sharing, replacing, and analyzing files.</p>
         <p>Today the File Manager sits at roughly <strong>95% adoption</strong> with about <strong>1,500 active business accounts</strong>.</p>
@@ -179,12 +182,43 @@
       <section id="solution">
         <h2>Solution</h2>
         <p>To close a real gap for our users, I pushed to keep developing the Media Management Ecosystem as a role-based solution, designed from the start to integrate with the rest of the product portfolio: the email module, internal plugins like Microsoft SharePoint, calendar and planning, external digital asset management systems (DAMs), and others.</p>
-        <p>That meant splitting the experience by role, then connecting the two halves:</p>
+        <p>That meant splitting the experience by role, then connecting the two halves inside of the Experience Studio:</p>
         <ul>
           <li><strong>My Files (editor-facing)</strong> lives inside the content-creation flow. Editors upload new files, reuse their own previous uploads from many entry points (media plugins, email, widgets), and access collections that admins have shared with them. The guiding principle: <em>in the editor’s world, the goal is to create content, not to manage files.</em></li>
           <li><strong>File Manager (admin-facing)</strong>: a dedicated, global interface for admins to upload, search, filter, organize, share, delete, replace, and analyze files across the whole platform. The guiding principle: <em>give admins real control and oversight, in a space designed for management, not content creation.</em></li>
         </ul>
         <p>Under the hood I designed shared functions the two features could reuse, so the ecosystem stayed consistent even as each side evolved at its own pace.</p>
+
+        <!-- Slideshow: the two role-based halves of the ecosystem. Only the .is-active
+             slide is shown; the inline script at the bottom of the page wires the arrows/dots. -->
+        <figure class="cs-figure cs-slideshow" aria-roledescription="carousel" aria-label="The two halves of the ecosystem: File Manager and My Files" tabindex="0">
+          <div class="cs-slides">
+            <div class="cs-slide is-active">
+              <img class="cs-hero-img" src="images/file manager 1.png" alt="File Manager admin interface showing the All Files grid: a global library of video and image files with search, filters and selection." />
+              <figcaption class="cs-figure-label cs-slide-caption">File Manager (admin): the global library for searching, filtering and managing every file on the platform.</figcaption>
+            </div>
+            <div class="cs-slide">
+              <img class="cs-hero-img" src="images/filemanager2.png" alt="File Manager admin interface showing the All Collections view: a grid of named collections, each with member avatars and an item count." />
+              <figcaption class="cs-figure-label cs-slide-caption">File Manager (admin): grouping approved assets into collections to share with editors and user groups.</figcaption>
+            </div>
+            <div class="cs-slide">
+              <img class="cs-hero-img" src="images/My Files Modal All Collections.png" alt="My Files editor modal on the All Files tab: media thumbnails with two files selected and an Add Files action." />
+              <figcaption class="cs-figure-label cs-slide-caption">My Files (editor): reusing and adding previous uploads without leaving the content flow.</figcaption>
+            </div>
+            <div class="cs-slide">
+              <img class="cs-hero-img" src="images/My Files Modal All Collections 2.png" alt="My Files editor modal on the All Collections tab: a grid of collections an admin has shared with the editor." />
+              <figcaption class="cs-figure-label cs-slide-caption">My Files (editor): browsing the collections an admin has shared.</figcaption>
+            </div>
+            <button class="cs-slide-nav cs-slide-prev" type="button" aria-label="Previous image">‹</button>
+            <button class="cs-slide-nav cs-slide-next" type="button" aria-label="Next image">›</button>
+          </div>
+          <div class="cs-slide-dots" role="tablist" aria-label="Choose image">
+            <button class="cs-slide-dot is-active" type="button" aria-label="Go to image 1"></button>
+            <button class="cs-slide-dot" type="button" aria-label="Go to image 2"></button>
+            <button class="cs-slide-dot" type="button" aria-label="Go to image 3"></button>
+            <button class="cs-slide-dot" type="button" aria-label="Go to image 4"></button>
+          </div>
+        </figure>
 
         <h3>★ Deep dive: File Manager</h3>
         <p>The File Manager is the heart of this case study: the admin’s command center for company media. It grew feature by feature, each with its own design story.</p>
@@ -345,6 +379,34 @@
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
+    })();
+  </script>
+
+  <!-- Solution-section slideshow: click the arrows or dots to step through the four
+       screenshots. Only the .is-active slide is shown; we just move that class. -->
+  <script>
+    (function () {
+      var root = document.querySelector('.cs-slideshow');
+      if (!root) return;
+      var slides = Array.prototype.slice.call(root.querySelectorAll('.cs-slide'));
+      var dots = Array.prototype.slice.call(root.querySelectorAll('.cs-slide-dot'));
+      if (!slides.length) return;
+      var current = 0;
+      function show(i) {
+        current = (i + slides.length) % slides.length;   // wrap around both ways
+        slides.forEach(function (s, n) { s.classList.toggle('is-active', n === current); });
+        dots.forEach(function (d, n) { d.classList.toggle('is-active', n === current); });
+      }
+      var prev = root.querySelector('.cs-slide-prev');
+      var next = root.querySelector('.cs-slide-next');
+      if (prev) prev.addEventListener('click', function () { show(current - 1); });
+      if (next) next.addEventListener('click', function () { show(current + 1); });
+      dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); }); });
+      // Left/right arrow keys move slides when the slideshow itself has focus.
+      root.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
+        else if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
+      });
     })();
   </script>
 </body>

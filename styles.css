@@ -816,6 +816,8 @@ body.chatbot-active .hero-right { visibility: hidden; }
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 0 0 1px 1px;            /* optically center the › glyph (nudge right + up) */
+  box-sizing: border-box;         /* keep the circle 26px while padding shifts the glyph */
   transition: background 0.15s ease, color 0.15s ease, opacity 0.15s ease;
 }
 .chatbot-chips-more:hover { background: var(--red); color: var(--white); }
@@ -959,7 +961,7 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
 
 /* Meta card (Role / Timeline / Team / Platform) — bordered rounded box */
 .case-study-meta {
-  margin: 28px 0 0;
+  margin: 28px 0 32px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px 32px;
@@ -1078,6 +1080,77 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   max-width: 340px;
 }
 
+/* ===== Solution slideshow — click-through of the two role-based halves ===== */
+.cs-slideshow { outline: none; }
+/* The image area: arrows are positioned against this box, so they stay centered
+   on the screenshot and don't drift when captions differ in height. */
+.cs-slides { position: relative; }
+/* Only the active slide is rendered, so the frame height follows each screenshot. */
+.cs-slide { display: none; }
+.cs-slide.is-active { display: block; }
+.cs-slide-caption {
+  display: block;
+  max-width: 420px;
+  margin: 8px auto 0;
+  padding-top: 4px;
+  text-align: center;
+}
+
+/* Overlay arrows — soft circular buttons centered over the image */
+.cs-slide-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 3px;              /* optically center the ‹ › glyphs */
+  font-size: 26px;
+  line-height: 1;
+  color: var(--red);               /* red chevron at rest (red/white — no black) */
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--gray-line);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+}
+/* Hover: fill solid red with a white chevron. */
+.cs-slide-nav:hover { background: var(--red); color: #fff; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18); }
+.cs-slide-nav:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+.cs-slide-prev { left: 12px; }
+.cs-slide-next { right: 12px; }
+
+/* Position indicator dots */
+.cs-slide-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+.cs-slide-dot {
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cfcfcf;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.cs-slide-dot:hover { background: #a8a8a8; }
+.cs-slide-dot.is-active { background: var(--red); transform: scale(1.15); }
+.cs-slide-dot:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+
+/* Phones: keep arrows tappable and hugging the edges */
+@media (max-width: 640px) {
+  .cs-slide-nav { width: 44px; height: 44px; font-size: 24px; }
+  .cs-slide-prev { left: 8px; }
+  .cs-slide-next { right: 8px; }
+}
+
 /* Case study on phones — single-column meta, tighter padding */
 @media (max-width: 640px) {
   .case-study-meta { grid-template-columns: 1fr; gap: 16px; padding: 22px 22px; }
@@ -1121,7 +1194,7 @@ html { scroll-behavior: smooth; }
   display: block;
   border: 1px solid var(--gray-line);
   border-radius: 10px;
-  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
 }
 
 /* Two-column body: sticky nav (left) + article (right) */
