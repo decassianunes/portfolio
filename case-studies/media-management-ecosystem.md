@@ -150,14 +150,6 @@ I also want to be honest about the limits. As a design team we don’t have comp
 
 ---
 
-## Role & Team
-
-I owned this work end-to-end, from discovery through UX / UI, hand-off, implementation support, analytics, and iteration, as the Product Designer on the feature.
-
-Most of the hard work was cross-functional. I collaborated closely with a **Product Manager** on discovery and prioritization, with **frontend and backend engineers** on what was actually feasible (and on reconciling design intent with backend constraints), and with **copywriting** on naming, including the team-wide agreement to call the feature “collections.” At one point I even teamed up with another product team that was redesigning a shared user/group selection UI, so we could implement it once, consistently.
-
----
-
 ## Success Metrics
 
 <!-- IMAGE: Adoption metric: dashboard / feature-flag comparison -->
