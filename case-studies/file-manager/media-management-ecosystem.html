@@ -5,27 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Media Management Ecosystem | Cássia Nunes</title>
   <meta name="description" content="Case study: designing a connected media-management ecosystem (My Files + File Manager) for an enterprise B2B SaaS." />
-  <link rel="stylesheet" href="../styles.css?v=10" />
+  <link rel="stylesheet" href="../../styles.css?v=10" />
 </head>
 <body>
 
   <!-- ===== HEADER / NAVIGATION (same on every page) ===== -->
   <header class="site-header">
-    <a href="../index.html" class="logo"><span class="logo-name">Cássia Nunes</span></a>
+    <a href="../../index.html" class="logo"><span class="logo-name">Cássia Nunes</span></a>
     <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
     <nav class="nav">
-      <a href="../work.html" class="active" data-i18n="nav.work">Work</a>
-      <a href="../playground.html" data-i18n="nav.playground">Playground</a>
-      <a href="../about.html" data-i18n="nav.about">About Me</a>
+      <a href="../../work.html" class="active" data-i18n="nav.work">Work</a>
+      <!-- Playground temporarily hidden from nav — page and content preserved. Remove this comment wrapper to restore. -->
+      <!-- <a href="../../playground.html" data-i18n="nav.playground">Playground</a> -->
+      <a href="../../about.html" data-i18n="nav.about">About Me</a>
       <div class="lang-select"></div>
     </nav>
   </header>
 
   <!-- Back link, always at the very top of the page -->
   <div class="cs-topbar">
-    <a href="../work.html" class="cs-back">
+    <a href="../../work.html" class="cs-back">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
       Back to work
     </a>
@@ -220,8 +221,9 @@
           </div>
         </figure>
 
-        <h3>★ Deep dive: File Manager</h3>
-        <p>The File Manager is the heart of this case study: the admin’s command center for company media. It grew feature by feature, each with its own design story.</p>
+        <h3>Deep dive: File Manager</h3>
+        <p>The File Manager is the heart of media handling in the Experience Studio — the admin’s command center for company assets and content planning. It grew feature by feature, each with its own design story.</p>
+        <p>Given the limits of a case study, I won’t cover everything, but I’ll introduce a few of the features that shaped this ecosystem. For a detailed walkthrough, I’m happy to take you through the Figma files.</p>
 
         <h3>Collections &amp; sharing: the headline problem</h3>
         <p>Admins needed to group approved files and share them with specific editors or user groups. Key decisions:</p>
@@ -260,19 +262,36 @@
           </div>
         </figure>
 
+        <h3>Search, filters &amp; sorting</h3>
+        <p>How do you find assets across different collections, users, and spaces? This was one of the most basic, yet most complex, sets of features, because it relied heavily on the backend structure: how we stored and located assets across products, teams, customer IDs, and spaces. Between design ideation and implementation, compromises were made to fit the scope and roadmap. In the end, we could search by exact file name. The catch: our users didn’t name their files. Without a doubt, this feature pushed me to grow as a designer working inside an implementation team.</p>
+
         <h3>Key decisions &amp; trade-offs</h3>
         <ul>
           <li><strong>Folders → Collections</strong>: language shapes mental models; we chose the word that matched how the system actually behaves.</li>
           <li><strong>Condensed upload icon</strong>: we collapsed the cluttered toolbar into a single condensed upload. The first icon (a paperclip) confused users, who couldn’t tell attachments from media uploads; we switched to an image icon and adoption of the new toolbar settled.</li>
           <li><strong>Fullscreen over modal-on-modal</strong>: chosen for accessibility and context, and it gave us a flexible, expandable pattern for future features.</li>
+          <li><strong>Accessibility first</strong>: baked into decisions rather than bolted on at the end.</li>
           <li><strong>Scoping and feature priority</strong>: repeatedly cutting scope (no sub-collections, video-only insights first, replacement before version history, no version history for deletion) to ship real value in small, backend-feasible batches.</li>
         </ul>
       </section>
 
       <section id="outcomes">
         <h2>Outcomes</h2>
-        <p>The ecosystem shipped in batches and became the central place for handling company media in the Studio: uploading, reusing, organizing, sharing, replacing, and analyzing files, all in one permission-aware system. The File Manager is now used across the platform, and the team is scoping its move fully out of Beta.</p>
-        <p>I also want to be honest about the limits. As a design team we don’t have complete, refined access to customer usage data, and I’m still growing my own ability to turn analytics into product insight, reading what the numbers and charts actually <em>mean</em>, not just what they show. There’s an internal effort forming a dedicated team for feature-usage analytics, and better tracking (more Pendo paths: how often a collection is shared, edited, deleted) is a clear next step. I’d rather show that growth edge than pretend the measurement was perfect.</p>
+        <p>The ecosystem shipped in batches and became the central, permission-aware place for handling company media in the Studio. What that changed, by audience:</p>
+        <dl class="cs-outcomes">
+          <div>
+            <dt>For users</dt>
+            <dd>Admins finally have real control and oversight of company media, in a space designed for management rather than content creation. Editors can reuse and share approved assets without leaving the content flow.</dd>
+          </div>
+          <div>
+            <dt>For the design team</dt>
+            <dd>A new media-upload flow and a reusable set of UX patterns for uploading, including error and empty states. A media module ready to be adopted across other product areas, plus a consolidated File Manager Design System Library as the single source of truth.</dd>
+          </div>
+          <div>
+            <dt>For the business</dt>
+            <dd>One permission-aware system for uploading, reusing, organizing, sharing, replacing, and analyzing media across the whole Studio, used by about 1,500 active business accounts. It also laid the groundwork for wider integrations, from the email module and SharePoint to external DAMs, as the team scopes its move fully out of Beta.</dd>
+          </div>
+        </dl>
         <figure class="cs-figure">
           <div class="cs-figure-box">
             <span class="cs-figure-label">Final polished File Manager UI: the shipped experience</span>
@@ -282,14 +301,24 @@
 
       <section id="metrics">
         <h2>Success Metrics</h2>
-        <figure class="cs-figure">
-          <div class="cs-figure-box">
-            <span class="cs-figure-label">Adoption metric: dashboard / feature-flag comparison</span>
+        <div class="cs-stats">
+          <div class="cs-stat">
+            <div class="cs-stat-num">95%</div>
+            <div class="cs-stat-label">Adoption in production</div>
+            <div class="cs-stat-sub">Up from 58% at release; benchmarked against one of the platform’s top feature flags.</div>
           </div>
-        </figure>
-        <ul>
-          <li><strong>~95% adoption</strong> of the File Manager, with about <strong>1,500 active business accounts</strong>, putting it among the platform’s most-adopted features when benchmarked against one of the most-used feature flags.</li>
-        </ul>
+          <div class="cs-stat">
+            <div class="cs-stat-num">1,549</div>
+            <div class="cs-stat-label">Active business accounts</div>
+            <span class="cs-stat-delta">+202.5%</span>
+            <div class="cs-stat-sub">vs. the previous 180 days.</div>
+          </div>
+          <div class="cs-stat">
+            <div class="cs-stat-num">9m 6s</div>
+            <div class="cs-stat-label">Avg. time on page per visitor</div>
+            <div class="cs-stat-sub">Sustained, deep engagement.</div>
+          </div>
+        </div>
       </section>
 
       <section id="challenges">
@@ -345,8 +374,8 @@
     </div>
   </footer>
 
-  <script src="../script.js?v=3"></script>
-  <script src="../i18n.js"></script>
+  <script src="../../script.js?v=3"></script>
+  <script src="../../i18n.js"></script>
   <!-- Scroll-spy: highlight the side-nav link for the section currently being read.
        We pick the last section whose top has scrolled past a line just below the
        sticky header, reliable whether you scroll gradually or jump via a link. -->
