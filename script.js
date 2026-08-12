@@ -130,3 +130,19 @@ if (copyBtn) {
     }
   });
 }
+
+// Work cards: play the preview video on hover / keyboard focus, and reset it on leave.
+// Only cards that actually have a .thumb-video are wired (the "Coming soon" cards don't),
+// so this is a no-op on pages without a preview video.
+document.querySelectorAll(".work-card .thumb-video").forEach(function (video) {
+  const card = video.closest(".work-card");
+  if (!card) return;
+  // Respect a visitor's "reduce motion" setting — no auto-playing preview for them.
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  function play() { if (!reduce) video.play().catch(function () {}); }  // ignore autoplay rejections
+  function stop() { video.pause(); video.currentTime = 0; }            // back to the first frame
+  card.addEventListener("mouseenter", play);
+  card.addEventListener("mouseleave", stop);
+  card.addEventListener("focusin", play);    // keyboard users get the preview too
+  card.addEventListener("focusout", stop);
+});

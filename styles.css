@@ -412,7 +412,8 @@ body.chatbot-active .hero-right { visibility: hidden; }
 .work-card { display: block; }
 
 .thumb {
-  aspect-ratio: 4 / 3;         /* keeps every thumbnail the same shape */
+  position: relative;          /* positioning context for the hover-preview video */
+  aspect-ratio: 16 / 9;        /* matches the case-study hero image so it isn't cropped */
   background: var(--gray-thumb);
   border: 1px solid var(--gray-line);
   border-radius: 8px;
@@ -426,6 +427,21 @@ body.chatbot-active .hero-right { visibility: hidden; }
   object-fit: cover;
   display: block;
 }
+
+/* Hover-preview video, layered over the poster image. It fills the same 4:3 box
+   (object-fit: cover — no distortion) and fades in on hover / keyboard focus;
+   the JS in script.js plays it on hover and resets it on leave. */
+.thumb-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;                  /* hidden until hover; the poster shows underneath */
+  transition: opacity 0.25s ease;
+}
+a.work-card:hover .thumb-video,
+a.work-card:focus-visible .thumb-video { opacity: 1; }
 
 /* "Coming soon" thumbnail — the error robot centred over the grey box. */
 .thumb--soon {
@@ -984,6 +1000,94 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   line-height: 1.45;
 }
 
+/* Outcomes list — checked label on the left, description on the right */
+.cs-outcomes {
+  margin: 24px 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+.cs-outcomes > div {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 20px 28px;
+  align-items: start;
+}
+.cs-outcomes dt {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--black);
+  line-height: 1.3;
+}
+.cs-outcomes dt::before {
+  content: "✓";
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--black);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.cs-outcomes dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Success-metrics stat cards — big number + label, à la the analytics dashboard */
+.cs-stats {
+  margin: 24px 0 32px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+}
+.cs-stat {
+  border: 1px solid var(--gray-line);
+  border-radius: 12px;
+  padding: 22px 24px;
+}
+.cs-stat-num {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--black);
+}
+.cs-stat-label {
+  margin-top: 10px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #999;
+}
+.cs-stat-sub {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #777;
+}
+.cs-stat-delta {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #e6f4ea;
+  color: #1a7f37;
+  font-size: 12px;
+  font-weight: 700;
+}
+
 /* Body typography */
 .case-study h2 {
   font-size: clamp(22px, 2.4vw, 27px);
@@ -1080,6 +1184,13 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
   max-width: 340px;
 }
 
+/* TEMP: hide empty image placeholders until the real screenshots are uploaded.
+   Hides any figure whose only content is a placeholder box (no <img> yet).
+   To bring the slots back, delete this one rule. */
+.cs-figure:has(> .cs-figure-box) {
+  display: none;
+}
+
 /* ===== Solution slideshow — click-through of the two role-based halves ===== */
 .cs-slideshow { outline: none; }
 /* The image area: arrows are positioned against this box, so they stay centered
@@ -1154,6 +1265,7 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
 /* Case study on phones — single-column meta, tighter padding */
 @media (max-width: 640px) {
   .case-study-meta { grid-template-columns: 1fr; gap: 16px; padding: 22px 22px; }
+  .cs-outcomes > div { grid-template-columns: 1fr; gap: 8px; }
 }
 
 /* ===== CASE STUDY — HERO + STICKY SIDE-NAV LAYOUT ===== */

@@ -10,7 +10,11 @@ A lightweight static site built with HTML, CSS, and vanilla JavaScript, hosted o
 
 ## Local development
 
+Requirements: `git` and `python3` (already on macOS). No build step.
+
 ```bash
+git clone https://github.com/decassianunes/portfolio.git
+cd portfolio
 python3 -m http.server 4321
 ```
 
