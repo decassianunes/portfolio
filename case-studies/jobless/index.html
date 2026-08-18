@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jobless in Berlin | Cássia Nunes</title>
-  <meta name="description" content="Jobless in Berlin — a product design case study by Cássia Nunes. Coming soon." />
-  <link rel="stylesheet" href="../../styles.css?v=11" />
+  <meta name="description" content="Jobless in Berlin: a product I designed and built to figure out how to live a new life after losing my job. A case study by Cássia Nunes." />
+  <link rel="stylesheet" href="../../styles.css?v=12" />
 </head>
 <body>
 
@@ -32,17 +32,63 @@
     </a>
   </div>
 
-  <!-- ===== COMING SOON — the case study is still being written ===== -->
-  <main class="cs-soon-page">
-    <h1 class="cs-soon-title">Jobless in Berlin</h1>
-    <p class="cs-soon-meta">Product Designer · 2026</p>
-    <div class="thumb thumb--soon cs-soon-card">
-      <img class="thumb-robot" src="../../svg/active.svg" alt="" />
-      <span class="thumb-soon-label">Coming soon</span>
-    </div>
-    <p class="cs-soon-note">While I’m writing the case study, feel free to try it online:</p>
-    <a class="hero-link" href="https://joblessberlin.de/" target="_blank" rel="noopener">Visit joblessberlin.de →</a>
-  </main>
+  <!-- ===== HERO ===== -->
+  <!-- Instead of a video walkthrough, the real product runs live inside the page.
+       The .cs-embed frame is a decorative browser window; the iframe loads joblessberlin.de. -->
+  <section class="cs-hero" id="top">
+    <h1 class="case-study-title">Jobless in Berlin</h1>
+    <figure class="cs-figure cs-hero-figure">
+      <div class="cs-embed">
+        <div class="cs-embed-bar">
+          <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="cs-embed-url">joblessberlin.de</span>
+          <span class="cs-embed-live">Live</span>
+        </div>
+        <iframe
+          class="cs-embed-frame"
+          src="https://joblessberlin.de/"
+          title="Jobless in Berlin: the live product, running inside this page"
+          loading="lazy"></iframe>
+      </div>
+      <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">
+        The real product, running live inside this page.
+      </figcaption>
+    </figure>
+  </section>
+
+  <!-- ===== BODY: single-column article (no side-nav on this focused page) ===== -->
+  <div class="cs-wrap cs-wrap--solo">
+    <article class="case-study">
+
+      <section id="tldr">
+        <h2>Overview</h2>
+        <dl class="case-study-meta">
+          <div>
+            <dt>Role</dt>
+            <dd>Solo: design &amp; build, from idea to shipped (0→1)</dd>
+          </div>
+          <div>
+            <dt>Timeline</dt>
+            <dd>2 months, with a pause to learn Google APIs</dd>
+          </div>
+          <div>
+            <dt>Built with</dt>
+            <dd>Vibe-coded with Claude Code, powered by Google APIs</dd>
+          </div>
+          <div>
+            <dt>Hosting</dt>
+            <dd>GitHub</dd>
+          </div>
+        </dl>
+        <p>My role got impacted. After 5 years, I had nowhere to go, no task to do, no meeting to attend.</p>
+        <p>I’m an immigrant. My social life was mostly built around work. When the job disappeared, a lot of the structure around my day disappeared with it, and the city suddenly felt too big.</p>
+        <p>So I built this, to figure out how to live this new life and to grow my AI design skills, taking a problem all the way to a solution using the tools available on the market today. It was an amazing journey that lasted two months, full of learnings and challenges.</p>
+        <p class="cs-soon-note">While the design case study is still in progress, you can try it live above and read the full story on my <a href="https://www.linkedin.com/posts/cassianunes_my-role-got-impacted-and-after-years-i-had-share-7472574382083616768-NQSM/" target="_blank" rel="noopener">LinkedIn</a>.</p>
+        <a class="hero-link" href="https://joblessberlin.de/" target="_blank" rel="noopener">Visit joblessberlin.de →</a>
+      </section>
+
+    </article>
+  </div>
 
   <!-- ===== FOOTER (contact sheet, same on every page) ===== -->
   <footer class="site-footer">
