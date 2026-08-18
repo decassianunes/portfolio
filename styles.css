@@ -1444,8 +1444,10 @@ html { scroll-behavior: smooth; }
   border: 0;
 }
 
-/* Single-column case-study layout (no side-nav): reuse the wrap but drop the grid. */
-.cs-wrap--solo { display: block; padding-top: 8px; }
+/* Single-column case-study layout (no side-nav): reuse the wrap but drop the grid.
+   Targets both classes so it beats the `.cs-wrap` grid rule below regardless of
+   source order or the responsive breakpoint. */
+.cs-wrap.cs-wrap--solo { display: block; padding-top: 8px; }
 .cs-wrap--solo .case-study { margin: 0 auto; }
 
 /* Two-column body: sticky nav (left) + article (right) */
