@@ -519,13 +519,18 @@ a.work-card:focus-visible .thumb-video { opacity: 1; }
 .cs-soon-gallery figure { margin: 0; }
 .cs-soon-shot { flex: 1 1 220px; max-width: 260px; }
 .cs-soon-shot--wide { flex-basis: 100%; max-width: 640px; margin-top: 18px; }
-.cs-soon-gallery img {
-  display: block;
-  width: 100%;
-  border: 1px solid var(--gray-line);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.09);
+.cs-soon-gallery img { display: block; width: 100%; }
+/* Clean minimal device frames. Phones get a slim rounded bezel; the desktop
+   shot reuses the .cs-embed browser-window chrome (see the Jobless page). */
+.cs-phone {
+  border: 8px solid #111214;
+  border-radius: 34px;
+  overflow: hidden;
+  background: #111214;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.18);
 }
+.cs-embed > img,
+.cs-embed > video { display: block; width: 100%; }
 .cs-soon-gallery figcaption {
   margin-top: 10px;
   font-size: 13px;

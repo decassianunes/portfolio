@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Media Management Ecosystem | Cássia Nunes</title>
   <meta name="description" content="Case study: designing a connected media-management ecosystem (My Files + File Manager) for an enterprise B2B SaaS." />
-  <link rel="stylesheet" href="../../styles.css?v=10" />
+  <link rel="stylesheet" href="../../styles.css?v=12" />
 </head>
 <body>
 
@@ -37,11 +37,17 @@
     <h1 class="case-study-title">Media Management Ecosystem for B2B SaaS</h1>
     <!-- Animated walkthrough of the shipped File Manager; poster shows the static image while it loads / as a fallback. -->
     <figure class="cs-figure cs-hero-figure">
-      <video class="cs-hero-img" autoplay muted loop playsinline
-             poster="images/file-manager-hero.png?v=2"
-             aria-label="File Manager, the shipped media-management UI, in use">
-        <source src="images/file-manager-hero.mp4" type="video/mp4" />
-      </video>
+      <div class="cs-embed">
+        <div class="cs-embed-bar">
+          <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+          <span class="cs-embed-url">app.staffbase.com</span>
+        </div>
+        <video autoplay muted loop playsinline
+               poster="images/file-manager-hero.png?v=2"
+               aria-label="File Manager, the shipped media-management UI, in use">
+          <source src="images/file-manager-hero.mp4" type="video/mp4" />
+        </video>
+      </div>
     </figure>
   </section>
 
@@ -138,8 +144,14 @@
           <li><strong>No sharing or collaboration.</strong> Admins couldn’t hand editors a curated set of approved assets, so teams fell back on Google Drive and Canva, pulling work outside the Studio entirely.</li>
         </ul>
         <figure class="cs-figure">
-          <img class="cs-hero-img" src="images/oldstudioupload.png" alt="The original Experience Studio editor and its cluttered media upload flow" />
-          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 4px;">The starting point of media handling in the content creation flow.</figcaption>
+          <div class="cs-embed">
+            <div class="cs-embed-bar">
+              <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="cs-embed-url">app.staffbase.com</span>
+            </div>
+            <img src="images/oldstudioupload.png" alt="The original Experience Studio editor and its cluttered media upload flow" />
+          </div>
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">The starting point of media handling in the content creation flow.</figcaption>
         </figure>
         <p>In short: the Studio had no central, trustworthy home for company media. That was a daily usability pain <em>and</em> a business problem: every file managed in an external tool was value leaving the product.</p>
       </section>
@@ -190,35 +202,46 @@
         </ul>
         <p>Under the hood I designed shared functions the two features could reuse, so the ecosystem stayed consistent even as each side evolved at its own pace.</p>
 
-        <!-- Slideshow: the two role-based halves of the ecosystem. Only the .is-active
-             slide is shown; the inline script at the bottom of the page wires the arrows/dots. -->
-        <figure class="cs-figure cs-slideshow" aria-roledescription="carousel" aria-label="The two halves of the ecosystem: File Manager and My Files" tabindex="0">
-          <div class="cs-slides">
-            <div class="cs-slide is-active">
-              <img class="cs-hero-img" src="images/file manager 1.png" alt="File Manager admin interface showing the All Files grid: a global library of video and image files with search, filters and selection." />
-              <figcaption class="cs-figure-label cs-slide-caption">File Manager (admin): the global library for searching, filtering and managing every file on the platform.</figcaption>
+        <!-- The two role-based halves of the ecosystem, each shown in a desktop browser frame. -->
+        <figure class="cs-figure">
+          <div class="cs-embed">
+            <div class="cs-embed-bar">
+              <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="cs-embed-url">app.staffbase.com</span>
             </div>
-            <div class="cs-slide">
-              <img class="cs-hero-img" src="images/filemanager2.png" alt="File Manager admin interface showing the All Collections view: a grid of named collections, each with member avatars and an item count." />
-              <figcaption class="cs-figure-label cs-slide-caption">File Manager (admin): grouping approved assets into collections to share with editors and user groups.</figcaption>
-            </div>
-            <div class="cs-slide">
-              <img class="cs-hero-img" src="images/My Files Modal All Collections.png" alt="My Files editor modal on the All Files tab: media thumbnails with two files selected and an Add Files action." />
-              <figcaption class="cs-figure-label cs-slide-caption">My Files (editor): reusing and adding previous uploads without leaving the content flow.</figcaption>
-            </div>
-            <div class="cs-slide">
-              <img class="cs-hero-img" src="images/My Files Modal All Collections 2.png" alt="My Files editor modal on the All Collections tab: a grid of collections an admin has shared with the editor." />
-              <figcaption class="cs-figure-label cs-slide-caption">My Files (editor): browsing the collections an admin has shared.</figcaption>
-            </div>
-            <button class="cs-slide-nav cs-slide-prev" type="button" aria-label="Previous image">‹</button>
-            <button class="cs-slide-nav cs-slide-next" type="button" aria-label="Next image">›</button>
+            <img src="images/file manager 1.png" alt="File Manager admin interface showing the All Files grid: a global library of video and image files with search, filters and selection." />
           </div>
-          <div class="cs-slide-dots" role="tablist" aria-label="Choose image">
-            <button class="cs-slide-dot is-active" type="button" aria-label="Go to image 1"></button>
-            <button class="cs-slide-dot" type="button" aria-label="Go to image 2"></button>
-            <button class="cs-slide-dot" type="button" aria-label="Go to image 3"></button>
-            <button class="cs-slide-dot" type="button" aria-label="Go to image 4"></button>
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">File Manager (admin): the global library for searching, filtering and managing every file on the platform.</figcaption>
+        </figure>
+        <figure class="cs-figure">
+          <div class="cs-embed">
+            <div class="cs-embed-bar">
+              <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="cs-embed-url">app.staffbase.com</span>
+            </div>
+            <img src="images/filemanager2.png" alt="File Manager admin interface showing the All Collections view: a grid of named collections, each with member avatars and an item count." />
           </div>
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">File Manager (admin): grouping approved assets into collections to share with editors and user groups.</figcaption>
+        </figure>
+        <figure class="cs-figure">
+          <div class="cs-embed">
+            <div class="cs-embed-bar">
+              <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="cs-embed-url">app.staffbase.com</span>
+            </div>
+            <img src="images/My Files Modal All Collections.png" alt="My Files editor modal on the All Files tab: media thumbnails with two files selected and an Add Files action." />
+          </div>
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">My Files (editor): reusing and adding previous uploads without leaving the content flow.</figcaption>
+        </figure>
+        <figure class="cs-figure">
+          <div class="cs-embed">
+            <div class="cs-embed-bar">
+              <div class="cs-embed-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+              <span class="cs-embed-url">app.staffbase.com</span>
+            </div>
+            <img src="images/My Files Modal All Collections 2.png" alt="My Files editor modal on the All Collections tab: a grid of collections an admin has shared with the editor." />
+          </div>
+          <figcaption class="cs-figure-label" style="text-align: center; margin-left: auto; margin-right: auto; padding-top: 8px;">My Files (editor): browsing the collections an admin has shared.</figcaption>
         </figure>
 
         <h3>Deep dive: File Manager</h3>
@@ -408,34 +431,6 @@
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update);
       update();
-    })();
-  </script>
-
-  <!-- Solution-section slideshow: click the arrows or dots to step through the four
-       screenshots. Only the .is-active slide is shown; we just move that class. -->
-  <script>
-    (function () {
-      var root = document.querySelector('.cs-slideshow');
-      if (!root) return;
-      var slides = Array.prototype.slice.call(root.querySelectorAll('.cs-slide'));
-      var dots = Array.prototype.slice.call(root.querySelectorAll('.cs-slide-dot'));
-      if (!slides.length) return;
-      var current = 0;
-      function show(i) {
-        current = (i + slides.length) % slides.length;   // wrap around both ways
-        slides.forEach(function (s, n) { s.classList.toggle('is-active', n === current); });
-        dots.forEach(function (d, n) { d.classList.toggle('is-active', n === current); });
-      }
-      var prev = root.querySelector('.cs-slide-prev');
-      var next = root.querySelector('.cs-slide-next');
-      if (prev) prev.addEventListener('click', function () { show(current - 1); });
-      if (next) next.addEventListener('click', function () { show(current + 1); });
-      dots.forEach(function (d, n) { d.addEventListener('click', function () { show(n); }); });
-      // Left/right arrow keys move slides when the slideshow itself has focus.
-      root.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') { show(current - 1); e.preventDefault(); }
-        else if (e.key === 'ArrowRight') { show(current + 1); e.preventDefault(); }
-      });
     })();
   </script>
 </body>
