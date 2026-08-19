@@ -58,7 +58,10 @@ This was not a tidy, linear process, and I think that’s the honest, valuable p
 
 ### Discovery
 
-We ran early workshops with multiple stakeholders to understand how media was actually handled, both by our customers and internally, across our infrastructure and code architecture (user roles, spaces, and branches).
+I planned and facilitated these workshops myself, bringing our PM, backend and frontend engineers, and customer care around the same board to build one shared picture of how media was really handled, both by our customers and internally, across our infrastructure and code architecture (user roles, spaces, and branches). I ran them as a recurring rhythm, for each new feature or state of development (filters, search, sort, deletion): early on to reframe the problem, and later to walk stakeholders through design proposals and pressure-test them before we committed to build.
+
+![A stakeholder working-session board mapping the forced-deletion flow across roles, spaces, and channels.](images/Workshop.png)
+*A board from one of these facilitated sessions between PM and devs: mapping the forced-deletion flow across roles turned invisible permission logic into something the whole team could see and debate.*
 
 Through many product calls with customers and users, a recurring insight emerged: on almost every team, media management was happening outside of our platform. That became a valuable signal, pointing us to missing opportunities in our product.
 
