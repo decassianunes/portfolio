@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Jobless in Berlin | Cássia Nunes</title>
   <meta name="description" content="Jobless in Berlin: a product I designed and built to figure out how to live a new life after losing my job. A case study by Cássia Nunes." />
-  <link rel="stylesheet" href="../../styles.css?v=12" />
+  <link rel="stylesheet" href="../../styles.css?v=14" />
 </head>
 <body>
 
   <!-- ===== HEADER / NAVIGATION (same on every page) ===== -->
   <header class="site-header">
-    <a href="../../index.html" class="logo"><span class="logo-name">Cássia Nunes</span></a>
+    <div class="header-left">
+      <a href="../../work.html" class="cs-back-icon" aria-label="Back to work" title="Back to work">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+      </a>
+      <a href="../../index.html" class="logo"><span class="logo-name">Cássia Nunes</span></a>
+    </div>
     <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">
       <span></span><span></span><span></span>
     </button>
@@ -24,13 +29,7 @@
     </nav>
   </header>
 
-  <!-- Back link, always at the very top of the page -->
-  <div class="cs-topbar">
-    <a href="../../work.html" class="cs-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
-      Back to work
-    </a>
-  </div>
+  <!-- Back link now lives in the sticky header (see .cs-back-icon), so it stays visible on scroll. -->
 
   <!-- ===== HERO ===== -->
   <!-- Instead of a video walkthrough, the real product runs live inside the page.

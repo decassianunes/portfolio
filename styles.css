@@ -46,6 +46,23 @@ a { color: inherit; text-decoration: none; }
   z-index: 10;
 }
 
+/* Left cluster in the header: the back arrow sits just before the name.
+   On inner pages this is the persistent "back to work" affordance; it stays
+   visible because the whole header is sticky. */
+.header-left {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.cs-back-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #777;
+  transition: color 0.15s ease;
+}
+.cs-back-icon svg { width: 20px; height: 20px; }
+.cs-back-icon:hover { color: var(--red); }
+
 /* Logo link — always present, empty on homepage (name lives in the hero),
    populated on inner pages. Min-width keeps the tap target reachable. */
 .logo {
@@ -512,13 +529,13 @@ a.work-card:focus-visible .thumb-video { opacity: 1; }
 .cs-soon-gallery {
   display: flex;
   flex-wrap: wrap;
-  gap: 18px;
+  gap: 32px;
   justify-content: center;
-  margin: 8px auto 4px;
+  margin: 32px auto 16px;
 }
 .cs-soon-gallery figure { margin: 0; }
 .cs-soon-shot { flex: 1 1 220px; max-width: 260px; }
-.cs-soon-shot--wide { flex-basis: 100%; max-width: 640px; margin-top: 18px; }
+.cs-soon-shot--wide { flex-basis: 100%; max-width: 640px; margin-top: 32px; }
 .cs-soon-gallery img { display: block; width: 100%; }
 /* Clean minimal device frames. Phones get a slim rounded bezel; the desktop
    shot reuses the .cs-embed browser-window chrome (see the Jobless page). */
@@ -1343,32 +1360,18 @@ a.work-card .thumb { transition: border-color 0.15s ease; }
 html { scroll-behavior: smooth; }
 
 /* Back link — pinned at the very top of the page, above the hero */
-.cs-topbar {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 22px 32px 0;
-}
-.cs-back {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #777;
-  transition: color 0.15s ease;
-}
-.cs-back svg { width: 18px; height: 18px; }
-.cs-back:hover { color: var(--red); }
+/* .cs-topbar / .cs-back removed: the back affordance now lives in the sticky
+   header as .cs-back-icon, which keeps it visible on scroll and reclaims the
+   vertical space the old bar used (helps the hero fit above the fold). */
 
 /* Hero band (full content width, above the two-column body) */
 .cs-hero {
   width: 100%;
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 40px 32px 8px;
+  padding: 24px 32px 8px;
 }
-.cs-hero-figure { margin: 40px 0 32px; }
+.cs-hero-figure { margin: 24px 0 24px; }
 .cs-hero-figure .cs-figure-box { aspect-ratio: 21 / 9; }
 
 /* Static hero image — soft-framed. (Temporary stand-in for a future animated walkthrough.) */
@@ -1448,7 +1451,10 @@ html { scroll-behavior: smooth; }
    Targets both classes so it beats the `.cs-wrap` grid rule below regardless of
    source order or the responsive breakpoint. */
 .cs-wrap.cs-wrap--solo { display: block; padding-top: 8px; }
-.cs-wrap--solo .case-study { margin: 0 auto; }
+/* Left-align the reading column to the hero's left edge (was centered, which
+   made the card and text look like they floated in the middle of the page),
+   and let it fill the full hero width instead of the narrower reading measure. */
+.cs-wrap--solo .case-study { margin: 0; max-width: none; }
 
 /* Two-column body: sticky nav (left) + article (right) */
 .cs-wrap {
