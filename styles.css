@@ -562,7 +562,9 @@ a.work-card:focus-visible .thumb-video { opacity: 1; }
   font-weight: 600;
 }
 
-.work-card-meta { font-size: 14px; color: #777; margin-top: 2px; }
+/* Short "what it is" line under each work-card title, above the Role · Year meta. */
+.work-card-desc { font-size: 14.5px; color: #444; margin-top: 5px; line-height: 1.4; }
+.work-card-meta { font-size: 14px; color: #777; margin-top: 3px; }
 
 /* ===== ABOUT ===== */
 .about-text {
