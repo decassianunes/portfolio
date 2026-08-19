@@ -34,8 +34,8 @@ The product has two sides:
 
 My scope was the Studio, and the two roles who live there:
 
-- **Amara, the Admin**: keeps the whole company on the *correct*, approved, up-to-date assets.
-- **Leo, the Editor**: just wants to *reuse* the right files and publish without friction.
+- **The Admin**: keeps the whole company on the *correct*, approved, up-to-date assets.
+- **The Editor**: just wants to *reuse* the right files and publish without friction.
 
 When I picked up this work, managing media in the Studio meant:
 
