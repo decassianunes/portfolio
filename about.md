@@ -24,7 +24,7 @@ I’m Cássia Nunes, a Senior Product Designer based in Berlin, specializing in 
 
 ## Paragraph 2
 
-Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m happiest when I learn and experience something new about another culture.
+Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m always happy to meet new people and learn new things.
 
 ## Paragraph 3 (outside of design)
 

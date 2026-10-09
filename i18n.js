@@ -26,7 +26,7 @@ const translations = {
     "about.p1":
       "I’m <span class=\"about-name\">Cássia Nunes</span>, a Senior Product Designer based in Berlin, specializing in B2B SaaS with a background in fashion design.",
     "about.p2":
-      "Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m happiest when I learn and experience something new about another culture.",
+      "Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m always happy to meet new people and learn new things.",
     "about.p3":
       "Outside of design, I enjoy discovering new places, learning German, and doing sports. I’m always up for a bike trip, a spinning class, or a Feierabend with coworkers.",
     "about.photoCaption": "Team event at Windobona: zero gravity, zero deadlines",
@@ -62,7 +62,7 @@ const translations = {
     "about.p1":
       "Ich bin <span class=\"about-name\">Cássia Nunes</span>, Senior Product Designerin mit Sitz in Berlin, spezialisiert auf B2B-SaaS, mit einem Hintergrund im Modedesign.",
     "about.p2":
-      "Ursprünglich komme ich aus Brasilien und lebe seit sieben Jahren in Berlin. Ich arbeite mit internationalen Teams aus vielen Kulturen und mit unterschiedlichen Hintergründen. Am glücklichsten bin ich, wenn ich etwas Neues über eine andere Kultur lerne und erlebe.",
+      "Ursprünglich komme ich aus Brasilien und lebe seit sieben Jahren in Berlin. Ich arbeite mit internationalen Teams aus vielen Kulturen und mit unterschiedlichen Hintergründen. Ich freue mich immer, neue Menschen kennenzulernen und Neues zu lernen.",
     "about.p3":
       "Außerhalb des Designs entdecke ich gerne neue Orte, lerne Deutsch und treibe Sport. Auf eine Radtour, einen Spinning-Kurs oder einen Feierabend mit Kolleginnen und Kollegen habe ich immer Lust.",
     "about.photoCaption": "Team-Event bei Windobona: null Schwerkraft, null Deadlines",
@@ -98,7 +98,7 @@ const translations = {
     "about.p1":
       "Sou <span class=\"about-name\">Cássia Nunes</span>, Senior Product Designer baseada em Berlim, especializada em SaaS B2B, com background em design de moda.",
     "about.p2":
-      "Originalmente do Brasil, moro em Berlim há sete anos, trabalhando com times internacionais de várias culturas e origens. Fico mais feliz quando aprendo e vivencio algo novo sobre outra cultura.",
+      "Originalmente do Brasil, moro em Berlim há sete anos, trabalhando com times internacionais de várias culturas e origens. Estou sempre feliz em conhecer pessoas novas e aprender coisas novas.",
     "about.p3":
       "Fora do design, gosto de descobrir lugares novos, aprender alemão e praticar esportes. Estou sempre a fim de uma pedalada, uma aula de spinning ou um Feierabend com colegas.",
     "about.photoCaption": "Evento de equipe no Windobona: gravidade zero, prazos zero",
