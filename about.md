@@ -18,26 +18,20 @@
 
 About Me
 
-## Paragraph 1
+## Lead sentence
 
-I'm a Product Designer with 5+ years of experience in UX design and interaction design for enterprise SaaS products, now combining that foundation with an AI-augmented design practice.
+I’m Cássia Nunes, a Senior Product Designer based in Berlin, specializing in B2B SaaS with a background in fashion design.
 
 ## Paragraph 2
 
-I have a proven track record in end-to-end product design, from user research and usability testing through prototyping and delivery, working within cross-functional agile teams. I use AI tools actively across my workflow: accelerating discovery, generating and stress-testing design concepts, and prototyping faster without sacrificing user-centricity.
+Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m happiest when I learn and experience something new about another culture.
 
-## Paragraph 3
+## Paragraph 3 (outside of design)
 
-My background combines hands-on UX practice with an MA in Consumer Behaviour, a working knowledge of code environments (GitHub, VS Code), and daily use of tools like Figma AI, Claude, Cursor, and LLMs, bringing research rigour, design systems thinking, and modern AI fluency to complex product challenges.
+Outside of design, I enjoy discovering new places, learning German, and doing sports. I’m always up for a bike trip, a spinning class, or a Feierabend with coworkers.
 
-## Highlight
-
-I believe the best designers right now aren't the ones who fear AI. They're the ones who know how to direct it.
-
-## Top skills label
-
-Top skills
-
-## Skills list
-
-Product Design · Artificial Intelligence for Design · User Experience (UX) · Interaction Design · UX Research
+<!--
+  NOT CURRENTLY SHOWN on the site (kept here in case you want them back):
+  Highlight: I believe the best designers right now aren't the ones who fear AI. They're the ones who know how to direct it.
+  Top skills: Product Design · Artificial Intelligence for Design · User Experience (UX) · Interaction Design · UX Research
+-->

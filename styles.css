@@ -567,34 +567,78 @@ a.work-card:focus-visible .thumb-video { opacity: 1; }
 .work-card-meta { font-size: 14px; color: #777; margin-top: 3px; }
 
 /* ===== ABOUT ===== */
-.about-text {
-  font-size: 18px;
-  max-width: 680px;
-  color: #333;
+/* Two columns: text on the left, photos on the right. Stacks on small screens (text first). */
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
 }
 
-.about-text p { margin-bottom: 20px; }   /* space between paragraphs */
-
-.about-highlight {
-  font-weight: 600;
-  color: var(--black);
-  border-left: 3px solid var(--red);   /* red accent bar on the standout line */
-  padding-left: 16px;
+.about-collage {
+  position: relative;
+  padding-bottom: 76px;   /* 48px for the small photo to hang below the big one + 28px for its caption */
 }
 
-.about-skills {
-  font-size: 15px;
-  color: #555;
+/* Empty placeholder, same look as the empty work thumbnails */
+.about-photo {
+  position: relative;
+  background: var(--gray-thumb);
+  border: 1px solid var(--gray-line);
+  border-radius: 4px;
 }
 
-.about-skills-label {
+.about-photo--main  { width: 88%; aspect-ratio: 4 / 5; }
+.about-photo--small { position: absolute; right: 0; bottom: 28px; width: 54%; aspect-ratio: 1 / 1; }
+.about-photo--wide  { width: 100%; aspect-ratio: 16 / 9; margin-top: 40px; }
+
+/* Small grey caption under a photo */
+.about-caption {
+  font-size: 12px;
+  color: #888;
+  margin-top: 8px;
+}
+
+/* Caption under the overlapping pair: sits under the small photo, right-aligned */
+.about-caption--collage {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin-top: 0;
+  text-align: right;
+}
+
+/* Real photos fill their frame (cropped, never stretched) */
+.about-photo img {
   display: block;
-  font-weight: 700;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: inherit;
+}
+.about-photo--main img  { object-position: 50% 30%; }   /* keep the face in frame */
+.about-photo--small img { object-position: 50% 75%; }   /* show the people, not the sky */
+
+.about-lead {
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 1.35;
   color: var(--black);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-size: 13px;
-  margin-bottom: 4px;
+  margin-bottom: 24px;
+}
+
+.about-name { color: var(--red); }   /* name in the site's accent red */
+
+.about-body {
+  font-size: 16px;
+  line-height: 1.7;
+  color: #444;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 820px) {
+  .about-layout { grid-template-columns: 1fr; gap: 40px; }
+  .about-lead { font-size: 22px; }
 }
 
 /* ===== CONTACT ===== */

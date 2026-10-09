@@ -24,11 +24,13 @@ const translations = {
 
     "about.title": "About Me",
     "about.p1":
-      "I'm a Product Designer with 5+ years of experience in UX design and interaction design for enterprise SaaS products, now combining that foundation with an AI-augmented design practice.",
+      "I’m <span class=\"about-name\">Cássia Nunes</span>, a Senior Product Designer based in Berlin, specializing in B2B SaaS with a background in fashion design.",
     "about.p2":
-      "I have a proven track record in end-to-end product design, from user research and usability testing through prototyping and delivery, working within cross-functional agile teams. I use AI tools actively across my workflow: accelerating discovery, generating and stress-testing design concepts, and prototyping faster without sacrificing user-centricity.",
+      "Originally from Brazil, I’ve been living in Berlin for seven years, working with international teams across many cultures and backgrounds. I’m happiest when I learn and experience something new about another culture.",
     "about.p3":
-      "My background combines hands-on UX practice with an MA in Consumer Behaviour, a working knowledge of code environments (GitHub, VS Code), and daily use of tools like Figma AI, Claude, Cursor, and LLMs, bringing research rigour, design systems thinking, and modern AI fluency to complex product challenges.",
+      "Outside of design, I enjoy discovering new places, learning German, and doing sports. I’m always up for a bike trip, a spinning class, or a Feierabend with coworkers.",
+    "about.photoCaption": "Team event at Windobona: zero gravity, zero deadlines",
+    "about.photoCaption2": "Team event: boat trip, Berlin",
     "about.highlight":
       "I believe the best designers right now aren't the ones who fear AI. They're the ones who know how to direct it.",
     "about.skillsLabel": "Top skills",
@@ -58,11 +60,13 @@ const translations = {
 
     "about.title": "Über mich",
     "about.p1":
-      "Ich bin Produktdesignerin mit über 5 Jahren Erfahrung in UX- und Interaction-Design für Enterprise-SaaS-Produkte – und verbinde diese Grundlage nun mit einer KI-gestützten Designpraxis.",
+      "Ich bin <span class=\"about-name\">Cássia Nunes</span>, Senior Product Designerin mit Sitz in Berlin, spezialisiert auf B2B-SaaS, mit einem Hintergrund im Modedesign.",
     "about.p2":
-      "Ich habe eine nachweisliche Erfolgsbilanz im End-to-End-Produktdesign – von User Research und Usability-Tests über Prototyping bis zur Auslieferung – in cross-funktionalen, agilen Teams. KI-Tools setze ich aktiv in meinem gesamten Workflow ein: um Discovery zu beschleunigen, Designkonzepte zu generieren und zu testen und schneller zu prototypen, ohne die Nutzerzentrierung zu opfern.",
+      "Ursprünglich komme ich aus Brasilien und lebe seit sieben Jahren in Berlin. Ich arbeite mit internationalen Teams aus vielen Kulturen und mit unterschiedlichen Hintergründen. Am glücklichsten bin ich, wenn ich etwas Neues über eine andere Kultur lerne und erlebe.",
     "about.p3":
-      "Mein Hintergrund verbindet praktische UX-Arbeit mit einem Master in Consumer Behaviour, fundierten Kenntnissen von Code-Umgebungen (GitHub, VS Code) und der täglichen Nutzung von Tools wie Figma AI, Claude, Cursor und LLMs – und bringt Research-Sorgfalt, Design-Systems-Denken und moderne KI-Kompetenz in komplexe Produktherausforderungen ein.",
+      "Außerhalb des Designs entdecke ich gerne neue Orte, lerne Deutsch und treibe Sport. Auf eine Radtour, einen Spinning-Kurs oder einen Feierabend mit Kolleginnen und Kollegen habe ich immer Lust.",
+    "about.photoCaption": "Team-Event bei Windobona: null Schwerkraft, null Deadlines",
+    "about.photoCaption2": "Team-Event: Bootstour, Berlin",
     "about.highlight":
       "Ich glaube, die besten Designer sind derzeit nicht die, die KI fürchten – sondern die, die sie zu lenken wissen.",
     "about.skillsLabel": "Top-Skills",
@@ -92,11 +96,13 @@ const translations = {
 
     "about.title": "Sobre mim",
     "about.p1":
-      "Sou Product Designer com mais de 5 anos de experiência em UX design e design de interação para produtos SaaS corporativos, e agora combino essa base com uma prática de design aumentada por IA.",
+      "Sou <span class=\"about-name\">Cássia Nunes</span>, Senior Product Designer baseada em Berlim, especializada em SaaS B2B, com background em design de moda.",
     "about.p2":
-      "Tenho um histórico comprovado em design de produto de ponta a ponta, de pesquisa com usuários e testes de usabilidade a prototipagem e entrega, atuando em times ágeis multifuncionais. Uso ferramentas de IA ativamente em todo o meu fluxo de trabalho: acelerando a descoberta, gerando e testando conceitos de design e prototipando mais rápido sem abrir mão da centralidade no usuário.",
+      "Originalmente do Brasil, moro em Berlim há sete anos, trabalhando com times internacionais de várias culturas e origens. Fico mais feliz quando aprendo e vivencio algo novo sobre outra cultura.",
     "about.p3":
-      "Minha formação combina prática em UX com um mestrado em Comportamento do Consumidor, conhecimento prático de ambientes de código (GitHub, VS Code) e uso diário de ferramentas como Figma AI, Claude, Cursor e LLMs, trazendo rigor de pesquisa, pensamento de design systems e fluência moderna em IA para desafios de produto complexos.",
+      "Fora do design, gosto de descobrir lugares novos, aprender alemão e praticar esportes. Estou sempre a fim de uma pedalada, uma aula de spinning ou um Feierabend com colegas.",
+    "about.photoCaption": "Evento de equipe no Windobona: gravidade zero, prazos zero",
+    "about.photoCaption2": "Evento de equipe: passeio de barco, Berlim",
     "about.highlight":
       "Acredito que os melhores designers hoje não são os que temem a IA. São os que sabem como direcioná-la.",
     "about.skillsLabel": "Principais habilidades",
@@ -118,7 +124,10 @@ function applyLanguage(lang) {
   // Swap every translatable element's text.
   document.querySelectorAll("[data-i18n]").forEach((el) => {
     const value = dict[el.getAttribute("data-i18n")];
-    if (value !== undefined) el.textContent = value;
+    if (value === undefined) return;
+    // Lines marked data-i18n-html may contain our own <span> markup (e.g. the red name).
+    if (el.hasAttribute("data-i18n-html")) el.innerHTML = value;
+    else el.textContent = value;
   });
 
   // Set the document language (helps screen readers pronounce correctly).
